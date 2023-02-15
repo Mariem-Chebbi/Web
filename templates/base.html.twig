@@ -13,14 +13,14 @@
     <link rel="icon" href="{{asset('assets/images/logo.png')}}">
     {% block stylesheets %}
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-eduwell-style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/templatemo-eduwell-style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lightbox.css')}}">
     {% endblock %}
     <!--
 
@@ -43,23 +43,44 @@ https://templatemo.com/tm-573-eduwell
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
                             <img src="{{asset('assets/images/logo.png')}}" width="40" height="40" alt="EduSex">
+                            
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#services">Services</a></li>
-                            <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                            <li class="scroll-to-section"><a href="#top" class="active">Lire</a></li>
                             <li class="has-sub">
-                                <a href="javascript:void(0)">Pages</a>
+                                <a href="javascript:void(0)">Blogs</a>
                                 <ul class="sub-menu">
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="our-services.html">Our Services</a></li>
-                                    <li><a href="contact-us.html">Contact Us</a></li>
+                                    <li><a href="about-us.html">Categ1</a></li>
+                                    <li><a href="our-services.html">Categ2</a></li>
+                                    <li><a href="contact-us.html">Categ3</a></li>
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#testimonials">Testimonials</a></li>
-                            <li class="scroll-to-section"><a href="#contact-section">Contact Us</a></li>
+                            <li class="scroll-to-section"><a href="#courses"></a></li>
+                            <li class="has-sub">
+                                <a href="javascript:void(0)">Nous</a>
+                                <ul class="sub-menu">
+                                    <li><a href="about-us.html">A propos</a></li>
+                                    <li><a href="our-services.html">Nos Services</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="javascript:void(0)">S'inscrire</a>
+                                <ul class="sub-menu">
+                                    <li><a href="about-us.html">Utilisateur</a></li>
+                                    <li><a href="our-services.html">Votre centre</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="javascript:void(0)">Se Connecter</a>
+                                <ul class="sub-menu">
+                                    <li><a href="about-us.html">Utilisateur</a></li>
+                                    <li><a href="our-services.html">Personnel</a></li>
+                                </ul>
+                            </li>
+                            
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -442,77 +463,17 @@ https://templatemo.com/tm-573-eduwell
         </div>
     </section>
 
+{% endblock %}
 
     <section class="contact-us" id="contact-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div id="map">
-
-                        <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7151.84524236698!2d-122.19494600413192!3d47.56605883252286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490695e625f8965%3A0xf99b055e76477def!2sNewcastle%20Beach%20Park%20Playground%2C%20Bellevue%2C%20WA%2098006%2C%20USA!5e0!3m2!1sen!2sth!4v1644335269264!5m2!1sen!2sth"
-                            width="100%" height="420px" frameborder="0"
-                            style="border:0; border-radius: 15px; position: relative; z-index: 2;"
-                            allowfullscreen=""></iframe>
-                        <div class="row">
-                            <div class="col-lg-4 offset-lg-1">
-                                <div class="contact-info">
-                                    <div class="icon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                    <h4>Phone</h4>
-                                    <span>010-020-0340</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="contact-info">
-                                    <div class="icon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                    <h4>Mobile</h4>
-                                    <span>090-080-0760</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="col-lg-4">
-                    <form id="contact" action="" method="post">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-heading">
-                                    <h6>Contact us</h6>
-                                    <h4>Say <em>Hello</em></h4>
-                                    <p>IF you need a working contact form by PHP script, please visit TemplateMo's
-                                        contact page for more info.</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <input type="name" name="name" id="name" placeholder="Full Name" autocomplete="on"
-                                        required>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
-                                        placeholder="Your Email" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <textarea name="message" id="message" placeholder="Your Message"></textarea>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="main-gradient-button">Send
-                                        Message</button>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </form>
+                <img alt="image" src="{{asset('logoEDUSEX.png')}}" />
+                        
                 </div>
                 <div class="col-lg-12">
                     <ul class="social-icons">
@@ -524,31 +485,26 @@ https://templatemo.com/tm-573-eduwell
                     </ul>
                 </div>
                 <div class="col-lg-12">
-                    <p class="copyright">Copyright © 2022 EduWell Co., Ltd. All Rights Reserved.
-
-                        <br>Design: <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                        <br>Distribution: <a rel="sponsored" href="https://themewagon.com"
-                            target="_blank">ThemeWagon</a>
+                    <p class="copyright">Votre éspace EDUSEX 
                     </p>
                 </div>
             </div>
         </div>
     </section>
-    {% endblock %}
-
+    
     {% block javascripts %}
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/tabs.js"></script>
-    <script src="assets/js/video.js"></script>
-    <script src="assets/js/slick-slider.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+    <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('assets/js/lightbox.js')}}"></script>
+    <script src="{{asset('assets/js/tabs.js')}}"></script>
+    <script src="{{asset('assets/js/video.js')}}"></script>
+    <script src="{{asset('assets/js/slick-slider.js')}}"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
     <script>
         //according to loftblog tut
         $('.nav li:first').addClass('active');
