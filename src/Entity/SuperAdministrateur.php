@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SuperAdministrateurRepository::class)]
-class SuperAdministrateur
+class SuperAdministrateur extends Utilisateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
