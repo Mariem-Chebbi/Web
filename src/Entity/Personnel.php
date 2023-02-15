@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'Type_personnel', type: 'string')]
 #[ORM\DiscriminatorMap(['gestionnaire_stock' => GestionnaireStock::class, 'Administrateur_centre' => AdministrateurCentre::class, 'Assistant_psychologique' => AssistantPsychologique::class])]
-class Personnel
+class Personnel extends Utilisateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
