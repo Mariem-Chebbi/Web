@@ -1,0 +1,29 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h6>Testimonials</h6>
+            <h4>What They <em>Think</em></h4>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="owl-testimonials owl-carousel" style="position: relative; z-index: 5;">
+            {% for i in Blog %}
+            <div class="item">
+              <p>{{i.description}}</p>
+                <h4>{{i.libelle}}</h4>
+                <span>{{i.auteur}}</span>
+                <img src= "{{ asset('images/' ~ i.image) }}" style="width: 200px; height: auto;" />
+            </div>
+            {%endfor %}
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
