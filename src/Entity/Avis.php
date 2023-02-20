@@ -17,10 +17,10 @@ class Avis
     private ?int $Note = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
-    private ?client $id_client = null;
+    private ?Client $id_client = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
-    private ?centre $id_centre = null;
+    private ?Centre $id_centre = null;
 
     public function getId(): ?int
     {

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230215140542 extends AbstractMigration
+final class Version20230215195641 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20230215140542 extends AbstractMigration
         $this->addSql('CREATE TABLE centre (id INT AUTO_INCREMENT NOT NULL, id_admin_centre_id INT DEFAULT NULL, nom_social VARCHAR(255) DEFAULT NULL, adresse VARCHAR(255) DEFAULT NULL, ville VARCHAR(255) DEFAULT NULL, logo VARCHAR(255) DEFAULT NULL, tel1 VARCHAR(255) DEFAULT NULL, tel2 VARCHAR(255) DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_C6A0EA7546951179 (id_admin_centre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE certification (id INT AUTO_INCREMENT NOT NULL, id_formation_id INT DEFAULT NULL, image VARCHAR(255) NOT NULL, INDEX IDX_6C3C6D7571C15D5C (id_formation_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE commentaire (id INT AUTO_INCREMENT NOT NULL, id_client_id INT DEFAULT NULL, id_centre_id INT DEFAULT NULL, commentaire VARCHAR(255) NOT NULL, INDEX IDX_67F068BC99DED506 (id_client_id), INDEX IDX_67F068BCC6096BE4 (id_centre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE creneau_horaire (id INT AUTO_INCREMENT NOT NULL, id_assistant_psy_id INT DEFAULT NULL, heure INT DEFAULT NULL, jour VARCHAR(255) DEFAULT NULL, etat TINYINT(1) DEFAULT NULL, INDEX IDX_521E5DC2E01AD1BC (id_assistant_psy_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE creneau_horaire (id INT AUTO_INCREMENT NOT NULL, heure_debut INT DEFAULT NULL, jour VARCHAR(255) DEFAULT NULL, etat TINYINT(1) DEFAULT NULL, heure_fin INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE documentation (id INT AUTO_INCREMENT NOT NULL, id_super_admin_id INT DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, image VARCHAR(255) DEFAULT NULL, INDEX IDX_73D5A93B869FA03D (id_super_admin_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE evenement (id INT AUTO_INCREMENT NOT NULL, nom_event VARCHAR(255) DEFAULT NULL, desc_event VARCHAR(255) DEFAULT NULL, date_debut DATE DEFAULT NULL, date_fin DATE DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE formation (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, date_formation DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -48,7 +48,6 @@ final class Version20230215140542 extends AbstractMigration
         $this->addSql('ALTER TABLE certification ADD CONSTRAINT FK_6C3C6D7571C15D5C FOREIGN KEY (id_formation_id) REFERENCES formation (id)');
         $this->addSql('ALTER TABLE commentaire ADD CONSTRAINT FK_67F068BC99DED506 FOREIGN KEY (id_client_id) REFERENCES utilisateur (id)');
         $this->addSql('ALTER TABLE commentaire ADD CONSTRAINT FK_67F068BCC6096BE4 FOREIGN KEY (id_centre_id) REFERENCES centre (id)');
-        $this->addSql('ALTER TABLE creneau_horaire ADD CONSTRAINT FK_521E5DC2E01AD1BC FOREIGN KEY (id_assistant_psy_id) REFERENCES utilisateur (id)');
         $this->addSql('ALTER TABLE documentation ADD CONSTRAINT FK_73D5A93B869FA03D FOREIGN KEY (id_super_admin_id) REFERENCES utilisateur (id)');
         $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045FC6096BE4 FOREIGN KEY (id_centre_id) REFERENCES centre (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D671C15D5C FOREIGN KEY (id_formation_id) REFERENCES formation (id)');
@@ -75,7 +74,6 @@ final class Version20230215140542 extends AbstractMigration
         $this->addSql('ALTER TABLE certification DROP FOREIGN KEY FK_6C3C6D7571C15D5C');
         $this->addSql('ALTER TABLE commentaire DROP FOREIGN KEY FK_67F068BC99DED506');
         $this->addSql('ALTER TABLE commentaire DROP FOREIGN KEY FK_67F068BCC6096BE4');
-        $this->addSql('ALTER TABLE creneau_horaire DROP FOREIGN KEY FK_521E5DC2E01AD1BC');
         $this->addSql('ALTER TABLE documentation DROP FOREIGN KEY FK_73D5A93B869FA03D');
         $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045FC6096BE4');
         $this->addSql('ALTER TABLE inscription DROP FOREIGN KEY FK_5E90F6D671C15D5C');

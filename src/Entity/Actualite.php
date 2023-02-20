@@ -30,7 +30,7 @@ class Actualite
     private ?Categorie $id_categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'actualites')]
-    private ?superAdministrateur $id_super_admin = null;
+    private ?SuperAdministrateur $id_super_admin = null;
 
     public function getId(): ?int
     {

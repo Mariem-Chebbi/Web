@@ -17,7 +17,7 @@ class Certification
     private ?string $Image = null;
 
     #[ORM\ManyToOne(inversedBy: 'certifications')]
-    private ?formation $id_formation = null;
+    private ?Formation $id_formation = null;
 
     public function getId(): ?int
     {

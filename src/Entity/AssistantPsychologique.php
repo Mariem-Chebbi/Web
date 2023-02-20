@@ -15,8 +15,8 @@ class AssistantPsychologique extends Personnel
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_assistant_psy', targetEntity: CreneauHoraire::class)]
-    private Collection $creneauHoraires;
+    //#[ORM\OneToMany(mappedBy: 'id_assistant_psy', targetEntity: CreneauHoraire::class)]
+    //private Collection $creneauHoraires;
 
     #[ORM\OneToMany(mappedBy: 'id_assistant_psy', targetEntity: RendezVous::class)]
     private Collection $rendezVouses;
@@ -24,7 +24,7 @@ class AssistantPsychologique extends Personnel
     public function __construct()
     {
         parent::__construct();
-        $this->creneauHoraires = new ArrayCollection();
+        //$this->creneauHoraires = new ArrayCollection();
         $this->rendezVouses = new ArrayCollection();
     }
 
@@ -33,35 +33,35 @@ class AssistantPsychologique extends Personnel
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, CreneauHoraire>
-     */
-    public function getCreneauHoraires(): Collection
-    {
-        return $this->creneauHoraires;
-    }
+    // /**
+    //  * @return Collection<int, CreneauHoraire>
+    //  */
+    // public function getCreneauHoraires(): Collection
+    // {
+    //     return $this->creneauHoraires;
+    // }
 
-    public function addCreneauHoraire(CreneauHoraire $creneauHoraire): self
-    {
-        if (!$this->creneauHoraires->contains($creneauHoraire)) {
-            $this->creneauHoraires->add($creneauHoraire);
-            $creneauHoraire->setIdAssistantPsy($this);
-        }
+    // public function addCreneauHoraire(CreneauHoraire $creneauHoraire): self
+    // {
+    //     if (!$this->creneauHoraires->contains($creneauHoraire)) {
+    //         $this->creneauHoraires->add($creneauHoraire);
+    //         $creneauHoraire->setIdAssistantPsy($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCreneauHoraire(CreneauHoraire $creneauHoraire): self
-    {
-        if ($this->creneauHoraires->removeElement($creneauHoraire)) {
-            // set the owning side to null (unless already changed)
-            if ($creneauHoraire->getIdAssistantPsy() === $this) {
-                $creneauHoraire->setIdAssistantPsy(null);
-            }
-        }
+    // public function removeCreneauHoraire(CreneauHoraire $creneauHoraire): self
+    // {
+    //     if ($this->creneauHoraires->removeElement($creneauHoraire)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($creneauHoraire->getIdAssistantPsy() === $this) {
+    //             $creneauHoraire->setIdAssistantPsy(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, RendezVous>

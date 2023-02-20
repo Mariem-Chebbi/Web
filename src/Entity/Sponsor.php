@@ -20,7 +20,7 @@ class Sponsor
     private ?string $Logo_sponsor = null;
 
     #[ORM\ManyToOne(inversedBy: 'sponsors')]
-    private ?evenement $id_event = null;
+    private ?Evenement $id_event = null;
 
     public function getId(): ?int
     {

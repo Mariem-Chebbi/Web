@@ -18,10 +18,10 @@ class Inscription
     private ?\DateTimeInterface $Date_inscription = null;
 
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
-    private ?formation $id_formation = null;
+    private ?Formation $id_formation = null;
 
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
-    private ?personnel $id_personnel = null;
+    private ?Personnel $id_personnel = null;
 
     public function getId(): ?int
     {

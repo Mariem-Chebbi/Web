@@ -28,10 +28,11 @@ class Personnel extends Utilisateur
     private Collection $notifications;
 
     #[ORM\ManyToOne(inversedBy: 'personnels')]
-    private ?centre $id_centre = null;
+    private ?Centre $id_centre = null;
 
     public function __construct()
     {
+        parent::__construct();
         $this->inscriptions = new ArrayCollection();
         $this->notifications = new ArrayCollection();
     }

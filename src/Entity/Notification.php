@@ -21,10 +21,10 @@ class Notification
     private ?string $Message = null;
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
-    private ?client $id_client = null;
+    private ?Client $id_client = null;
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
-    private ?personnel $id_personnel = null;
+    private ?Personnel $id_personnel = null;
 
     public function getId(): ?int
     {

@@ -17,7 +17,7 @@ class Image
     private ?string $Url = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
-    private ?centre $Id_centre = null;
+    private ?Centre $Id_centre = null;
 
     public function getId(): ?int
     {

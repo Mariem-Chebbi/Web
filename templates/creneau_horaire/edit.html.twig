@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container" style="margin-top: 150px;">
+    <div class="main-button-gradient">
+        <a href="{{path('list_creneau')}}" class="text-button">Liste de mes Horaires</a>
+    </div>
+    <h1 class="m-5">Editer le créneau horaire pour <strong>{{creneau.jour}}</strong></h1>
+    {{form(formEdit)}}
+</div>
+{% endblock %}

@@ -17,10 +17,10 @@ class Commentaire
     private ?string $commentaire = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?client $id_client = null;
+    private ?Client $id_client = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?centre $id_centre = null;
+    private ?Centre $id_centre = null;
 
     public function getId(): ?int
     {

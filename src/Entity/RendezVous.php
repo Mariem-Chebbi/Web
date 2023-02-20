@@ -18,13 +18,13 @@ class RendezVous
     private ?\DateTimeInterface $date_rdv = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    private ?client $id_client = null;
+    private ?Client $id_client = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    private ?assistantPsychologique $id_assistant_psy = null;
+    private ?AssistantPsychologique $id_assistant_psy = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    private ?listeAttente $id_liste_attente = null;
+    private ?ListeAttente $id_liste_attente = null;
 
     public function getId(): ?int
     {

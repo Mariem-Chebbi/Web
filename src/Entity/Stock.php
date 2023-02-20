@@ -17,10 +17,10 @@ class Stock
     private ?int $Qte = null;
 
     #[ORM\ManyToOne(inversedBy: 'stocks')]
-    private ?produit $id_produit = null;
+    private ?Produit $id_produit = null;
 
     #[ORM\ManyToOne(inversedBy: 'stocks')]
-    private ?centre $id_centre = null;
+    private ?Centre $id_centre = null;
 
     public function getId(): ?int
     {

@@ -14,7 +14,7 @@ class CreneauHoraire
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $heure = null;
+    private ?int $heure_debut = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $jour = null;
@@ -22,22 +22,25 @@ class CreneauHoraire
     #[ORM\Column(nullable: true)]
     private ?bool $etat = null;
 
-    #[ORM\ManyToOne(inversedBy: 'creneauHoraires')]
-    private ?assistantPsychologique $id_assistant_psy = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $heure_fin = null;
+
+    //#[ORM\ManyToOne(inversedBy: 'creneauHoraires')]
+    //private ?AssistantPsychologique $id_assistant_psy = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getHeure(): ?int
+    public function getHeureDebut(): ?int
     {
-        return $this->heure;
+        return $this->heure_debut;
     }
 
-    public function setHeure(?int $heure): self
+    public function setHeureDebut(?int $heure): self
     {
-        $this->heure = $heure;
+        $this->heure_debut = $heure;
 
         return $this;
     }
@@ -66,14 +69,26 @@ class CreneauHoraire
         return $this;
     }
 
-    public function getIdAssistantPsy(): ?assistantPsychologique
+    // public function getIdAssistantPsy(): ?assistantPsychologique
+    // {
+    //     return $this->id_assistant_psy;
+    // }
+
+    // public function setIdAssistantPsy(?assistantPsychologique $id_assistant_psy): self
+    // {
+    //     $this->id_assistant_psy = $id_assistant_psy;
+
+    //     return $this;
+    // } 
+
+    public function getHeureFin(): ?int
     {
-        return $this->id_assistant_psy;
+        return $this->heure_fin;
     }
 
-    public function setIdAssistantPsy(?assistantPsychologique $id_assistant_psy): self
+    public function setHeureFin(int $heure_fin): self
     {
-        $this->id_assistant_psy = $id_assistant_psy;
+        $this->heure_fin = $heure_fin;
 
         return $this;
     }

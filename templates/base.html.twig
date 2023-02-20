@@ -11,6 +11,8 @@
 
     <title>EduSex</title>
     <link rel="icon" href="{{asset('assets/images/logo.png')}}">
+    {% block css %}
+    {% endblock %}
     {% block stylesheets %}
     <!-- Bootstrap core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -43,7 +45,7 @@ https://templatemo.com/tm-573-eduwell
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
                             <img src="{{asset('assets/images/logo.png')}}" width="40" height="40" alt="EduSex">
-                            
+
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -80,7 +82,7 @@ https://templatemo.com/tm-573-eduwell
                                     <li><a href="our-services.html">Personnel</a></li>
                                 </ul>
                             </li>
-                            
+
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -463,17 +465,17 @@ https://templatemo.com/tm-573-eduwell
         </div>
     </section>
 
-{% endblock %}
+    {% endblock %}
 
     <section class="contact-us" id="contact-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    
+
                 </div>
-                <div class="col-lg-4">
-                <img alt="image" src="{{asset('logoEDUSEX.png')}}" />
-                        
+                <div class="col-lg-4" style="visibility: hidden;">
+                    <img alt="image" src="{{asset('logoEDUSEX.png')}}" />
+
                 </div>
                 <div class="col-lg-12">
                     <ul class="social-icons">
@@ -485,13 +487,13 @@ https://templatemo.com/tm-573-eduwell
                     </ul>
                 </div>
                 <div class="col-lg-12">
-                    <p class="copyright">Votre éspace EDUSEX 
+                    <p class="copyright">Votre éspace EDUSEX
                     </p>
                 </div>
             </div>
         </div>
     </section>
-    
+
     {% block javascripts %}
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
