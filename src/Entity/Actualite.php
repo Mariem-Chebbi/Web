@@ -29,8 +29,6 @@ class Actualite
     #[ORM\ManyToOne(inversedBy: 'actualites')]
     private ?Categorie $id_categorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'actualites')]
-    private ?SuperAdministrateur $id_super_admin = null;
 
     public function getId(): ?int
     {
@@ -93,18 +91,6 @@ class Actualite
     public function setIdCategorie(?Categorie $id_categorie): self
     {
         $this->id_categorie = $id_categorie;
-
-        return $this;
-    }
-
-    public function getIdSuperAdmin(): ?superAdministrateur
-    {
-        return $this->id_super_admin;
-    }
-
-    public function setIdSuperAdmin(?superAdministrateur $id_super_admin): self
-    {
-        $this->id_super_admin = $id_super_admin;
 
         return $this;
     }

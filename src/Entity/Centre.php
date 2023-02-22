@@ -39,12 +39,6 @@ class Centre
     #[ORM\OneToMany(mappedBy: 'Id_centre', targetEntity: Image::class)]
     private Collection $images;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?AdministrateurCentre $id_admin_centre = null;
-
-    #[ORM\OneToMany(mappedBy: 'id_centre', targetEntity: Personnel::class)]
-    private Collection $personnels;
-
     #[ORM\OneToMany(mappedBy: 'id_centre', targetEntity: Avis::class)]
     private Collection $avis;
 
@@ -57,7 +51,6 @@ class Centre
     public function __construct()
     {
         $this->images = new ArrayCollection();
-        $this->personnels = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->stocks = new ArrayCollection();
@@ -182,47 +175,7 @@ class Centre
         return $this;
     }
 
-    public function getIdAdminCentre(): ?AdministrateurCentre
-    {
-        return $this->id_admin_centre;
-    }
 
-    public function setIdAdminCentre(?AdministrateurCentre $id_admin_centre): self
-    {
-        $this->id_admin_centre = $id_admin_centre;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Personnel>
-     */
-    public function getPersonnels(): Collection
-    {
-        return $this->personnels;
-    }
-
-    public function addPersonnel(Personnel $personnel): self
-    {
-        if (!$this->personnels->contains($personnel)) {
-            $this->personnels->add($personnel);
-            $personnel->setIdCentre($this);
-        }
-
-        return $this;
-    }
-
-    public function removePersonnel(Personnel $personnel): self
-    {
-        if ($this->personnels->removeElement($personnel)) {
-            // set the owning side to null (unless already changed)
-            if ($personnel->getIdCentre() === $this) {
-                $personnel->setIdCentre(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Avis>

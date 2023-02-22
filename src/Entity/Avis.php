@@ -17,9 +17,6 @@ class Avis
     private ?int $Note = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
-    private ?Client $id_client = null;
-
-    #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?Centre $id_centre = null;
 
     public function getId(): ?int
@@ -35,18 +32,6 @@ class Avis
     public function setNote(int $Note): self
     {
         $this->Note = $Note;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?client
-    {
-        return $this->id_client;
-    }
-
-    public function setIdClient(?client $id_client): self
-    {
-        $this->id_client = $id_client;
 
         return $this;
     }

@@ -33,6 +33,7 @@ class EditCreneauHoraireType extends AbstractType
                 ]
             )
             ->add('etat', null, [
+                'label' => 'fermé',
                 'attr' => [
                     'class' => 'form-check-input',
                     'style' => 'margin-left: 8px'

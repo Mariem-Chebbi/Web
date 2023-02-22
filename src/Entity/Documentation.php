@@ -19,8 +19,7 @@ class Documentation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Image = null;
 
-    #[ORM\ManyToOne(inversedBy: 'documentations')]
-    private ?SuperAdministrateur $id_super_admin = null;
+
 
     public function getId(): ?int
     {
@@ -47,18 +46,6 @@ class Documentation
     public function setImage(?string $Image): self
     {
         $this->Image = $Image;
-
-        return $this;
-    }
-
-    public function getIdSuperAdmin(): ?SuperAdministrateur
-    {
-        return $this->id_super_admin;
-    }
-
-    public function setIdSuperAdmin(?SuperAdministrateur $id_super_admin): self
-    {
-        $this->id_super_admin = $id_super_admin;
 
         return $this;
     }

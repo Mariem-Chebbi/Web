@@ -3,7 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CreneauHoraireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use PhpParser\ErrorHandler\Collecting;
+
 
 #[ORM\Entity(repositoryClass: CreneauHoraireRepository::class)]
 class CreneauHoraire
@@ -14,9 +19,14 @@ class CreneauHoraire
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\LessThan(
+        message: "L'heure début doit être inférieur à l'heure fin",
+        propertyPath: 'heure_fin',
+    )]
     private ?int $heure_debut = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotNull(message: "Veuillez choisir un jour")]
     private ?string $jour = null;
 
     #[ORM\Column(nullable: true)]

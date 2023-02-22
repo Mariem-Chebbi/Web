@@ -6,6 +6,8 @@ use App\Entity\CreneauHoraire;
 use App\Repository\CreneauHoraireRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,38 +20,26 @@ class AddCreneauHoraireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add(
-            //     'creneauHoraire',
-            //     ChoiceType::class,
-            //     [
-            //         //'class' => CreneauHoraire::class,
-            //         //'mapped' => false,
-            //         'choices' => function (CreneauHoraireRepository $repository) {
-            //             $days = ["Lundi" => "Lundi", "Mardi" => "Mardi", "Mercredi" => "Mercredi", "Jeudi" => "Jeudi", "Vendredi" => "Vendredi", "Samedi" => "Samedi", "Dimanche" => "Dimanche"];
-            //             foreach ($repository->findActiveEtat() as $key => $value) {
-            //                 if (in_array($value, array_values($days))) {
-            //                     unset($days[$key]);
-            //                 }
-            //             }
-            //             return $days;
-            //         },
-            //         //'choice_label' => 'jour',
-            //         'expanded' => false,
-            //         'multiple' => false,
-            //         'required' => true,
-            //         'attr' => [
-            //             'class' => 'form-control',
-            //             'style' => 'font-size: 16px;',
-            //         ],
-            //     ]
-            // )
             ->add(
                 'jour',
-                TextType::class,
+                ChoiceType::class,
                 [
+                    'choices' => [
+                        'Lundi' => 'Lundi',
+                        'Mardi' => 'Mardi',
+                        'Mercredi' => 'Mercredi',
+                        'Jeudi' => 'Jeudi',
+                        'Vendredi' => 'Vendredi',
+                        'Samedi' => 'Samedi',
+                        'Dimanche' => 'Dimanche'
+                    ],
+                    'placeholder' => 'choisir un jour',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => true,
                     'attr' => [
                         'class' => 'form-control',
-                        'style' => 'color: blue; font-size: 16px;',
+                        'style' => 'color: black; font-size: 16px;',
                     ],
                 ]
             )
@@ -80,9 +70,11 @@ class AddCreneauHoraireType extends AbstractType
                     '22' => 22,
                     '23' => 23,
                 ],
+                'invalid_message' => 'aaabbb',
                 'expanded' => false,
                 'multiple' => false,
                 'required' => true,
+                'error_bubbling' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'color: blue; font-size: 16px;',
@@ -119,13 +111,16 @@ class AddCreneauHoraireType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'required' => true,
+
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'color: blue; font-size: 16px;',
                 ],
 
             ])
-            ->add('etat', null, [
+            ->add('etat', CheckboxType::class, [
+                'label' => 'fermé',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
                     'style' => 'margin-left: 8px'
@@ -137,7 +132,7 @@ class AddCreneauHoraireType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-dark main-gradient-button',
+                        'class' => 'btn btn-dark px-4',
                         'id' => 'form-submit'
                     ],
                 ]

@@ -20,9 +20,6 @@ class Inscription
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
     private ?Formation $id_formation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
-    private ?Personnel $id_personnel = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -48,18 +45,6 @@ class Inscription
     public function setIdFormation(?formation $id_formation): self
     {
         $this->id_formation = $id_formation;
-
-        return $this;
-    }
-
-    public function getIdPersonnel(): ?personnel
-    {
-        return $this->id_personnel;
-    }
-
-    public function setIdPersonnel(?personnel $id_personnel): self
-    {
-        $this->id_personnel = $id_personnel;
 
         return $this;
     }

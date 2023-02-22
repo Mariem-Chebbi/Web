@@ -1,10 +1,56 @@
 {% extends 'base.html.twig' %}
+{% block css %}
+<style>
+    .form-border {
+        border: 1px solid white;
+        border-radius: 7px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+</style>
+{% endblock %}
 {% block body %}
 <div class="container" style="margin-top: 150px;">
     <div class="main-button-gradient">
         <a href="{{path('list_creneau')}}" class="text-button">Liste de mes Horaires</a>
     </div>
-    <h1 class="m-5">Editer le créneau horaire pour <strong>{{creneau.jour}}</strong></h1>
-    {{form(formEdit)}}
+
+    <div class="form-border col-8 mx-auto m-3 p-5">
+        <h1 class="mb-3">Editer le créneau horaire pour <strong>{{creneau.jour}}</strong></h1>
+        <div class="mt-3">
+            {{ form_start(formEdit, {attr: {'novalidate': 'novalidate'}}) }}
+            {% if show %}
+            <div class="alert alert-danger">
+                {{ form_errors(formEdit,{'attr':{'class':'alert alert-danger'}}) }}
+            </div>
+            {% endif %}
+            <div class="my-3 row">
+                <div class="col-5">
+                    {{ form_label(formEdit.heureDebut,"Heure début") }}
+                    {{ form_errors(formEdit.heureDebut) }}
+                    {{ form_widget(formEdit.heureDebut) }}
+                </div>
+
+                <div class="col-5">
+                    {{ form_label(formEdit.heureFin) }}
+                    {{ form_errors(formEdit.heureFin) }}
+                    {{ form_widget(formEdit.heureFin) }}
+                </div>
+            </div>
+            <div class="col-4">
+                {{ form_label(formEdit.etat) }}
+                {{ form_errors(formEdit.etat) }}
+                {{ form_widget(formEdit.etat) }}
+            </div>
+            <div class="col-4" style="display: none;">
+                {{ form_label(formEdit.jour) }}
+                {{ form_errors(formEdit.jour) }}
+                {{ form_widget(formEdit.jour) }}
+            </div>
+            <div class="my-2 d-flex justify-content-md-end">
+                {{ form_end(formEdit) }}
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

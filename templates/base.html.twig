@@ -493,6 +493,8 @@ https://templatemo.com/tm-573-eduwell
             </div>
         </div>
     </section>
+    {% block script %}
+    {% endblock %}
 
     {% block javascripts %}
     <!-- Scripts -->
@@ -507,6 +509,7 @@ https://templatemo.com/tm-573-eduwell
     <script src="{{asset('assets/js/video.js')}}"></script>
     <script src="{{asset('assets/js/slick-slider.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    <script src="{{asset('assets/js/app.js')}}"></script>
     <script>
         //according to loftblog tut
         $('.nav li:first').addClass('active');
@@ -553,6 +556,27 @@ https://templatemo.com/tm-573-eduwell
         $(window).scroll(function () {
             checkSection();
         });
+
+
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
     </script>
     {% endblock %}
 </body>

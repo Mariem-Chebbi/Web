@@ -18,13 +18,13 @@ class RendezVous
     private ?\DateTimeInterface $date_rdv = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    private ?Client $id_client = null;
-
-    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    private ?AssistantPsychologique $id_assistant_psy = null;
-
-    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
     private ?ListeAttente $id_liste_attente = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
+    private ?User $id_personnel = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $heure = null;
 
     public function getId(): ?int
     {
@@ -43,30 +43,6 @@ class RendezVous
         return $this;
     }
 
-    public function getIdClient(): ?client
-    {
-        return $this->id_client;
-    }
-
-    public function setIdClient(?client $id_client): self
-    {
-        $this->id_client = $id_client;
-
-        return $this;
-    }
-
-    public function getIdAssistantPsy(): ?assistantPsychologique
-    {
-        return $this->id_assistant_psy;
-    }
-
-    public function setIdAssistantPsy(?assistantPsychologique $id_assistant_psy): self
-    {
-        $this->id_assistant_psy = $id_assistant_psy;
-
-        return $this;
-    }
-
     public function getIdListeAttente(): ?listeAttente
     {
         return $this->id_liste_attente;
@@ -75,6 +51,30 @@ class RendezVous
     public function setIdListeAttente(?listeAttente $id_liste_attente): self
     {
         $this->id_liste_attente = $id_liste_attente;
+
+        return $this;
+    }
+
+    public function getIdPersonnel(): ?User
+    {
+        return $this->id_personnel;
+    }
+
+    public function setIdPersonnel(?User $id_personnel): self
+    {
+        $this->id_personnel = $id_personnel;
+
+        return $this;
+    }
+
+    public function getHeure(): ?\DateTimeInterface
+    {
+        return $this->heure;
+    }
+
+    public function setHeure(?\DateTimeInterface $heure): self
+    {
+        $this->heure = $heure;
 
         return $this;
     }

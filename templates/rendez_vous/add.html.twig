@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container" style="margin-top: 150px;">
+    {{ form_start(form) }}
+
+    {{ form_row(form.date_rdv) }}
+
+    {{ form_row(form.hour) }}
+
+    <script>
+        var dateField = document.getElementById('form_date');
+        var timeField = document.getElementById('form_time');
+
+        dateField.addEventListener('change', function () {
+            var date = new Date(this.value);
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+
+            timeField.value = hours + ':' + minutes;
+        });
+    </script>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

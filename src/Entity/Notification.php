@@ -20,12 +20,6 @@ class Notification
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Message = null;
 
-    #[ORM\ManyToOne(inversedBy: 'notifications')]
-    private ?Client $id_client = null;
-
-    #[ORM\ManyToOne(inversedBy: 'notifications')]
-    private ?Personnel $id_personnel = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -51,30 +45,6 @@ class Notification
     public function setMessage(?string $Message): self
     {
         $this->Message = $Message;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?client
-    {
-        return $this->id_client;
-    }
-
-    public function setIdClient(?client $id_client): self
-    {
-        $this->id_client = $id_client;
-
-        return $this;
-    }
-
-    public function getIdPersonnel(): ?personnel
-    {
-        return $this->id_personnel;
-    }
-
-    public function setIdPersonnel(?personnel $id_personnel): self
-    {
-        $this->id_personnel = $id_personnel;
 
         return $this;
     }

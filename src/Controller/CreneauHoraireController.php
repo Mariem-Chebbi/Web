@@ -25,23 +25,44 @@ class CreneauHoraireController extends AbstractController
     #[Route('/creneau-horaire/add', name: 'add_creneau')]
     public function add(ManagerRegistry $doctrine, Request $request): Response
     {
+        $showHeureError = false;
+        $showJourError = false;
         $creneau = new CreneauHoraire();
         $form = $this->createForm(AddCreneauHoraireType::class, $creneau);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $cr = $form->getData();
-            //dd($cr);
-            if ($cr->isEtat() == true) {
-                $creneau->setHeureDebut(0);
-                $creneau->setHeureFin(0);
+        if ($form->isSubmitted()) {
+            if (count($form->getErrors()) > 0) {
+                $showHeureError = true;
             }
-            $em = $doctrine->getManager();
-            $em->persist($creneau);
-            $em->flush();
-            return $this->redirectToRoute('list_creneau');
+            if (count($form->get('jour')->getErrors()) > 0) {
+                $showJourError = true;
+            }
+            $etat = $form->get('etat')->getData();
+            if ($form->isValid() || $etat) {
+                $cr = $form->getData();
+                $jour = $form->get('jour')->getData();
+                $heureDeb = $form->get('heureDebut')->getData();
+                $heureFin = $form->get('heureFin')->getData();
+                $etat = $form->get('etat')->getData();
+                $creneau = $doctrine->getRepository(CreneauHoraire::class)->findOneBy(['jour' => $jour]);
+                $creneau
+                    ->setHeureDebut($heureDeb)
+                    ->setHeureFin($heureFin)
+                    ->setEtat($etat);
+                if ($cr->isEtat() == true) {
+                    $creneau->setHeureDebut(0);
+                    $creneau->setHeureFin(0);
+                }
+                $em = $doctrine->getManager();
+                //$em->persist($creneau);
+                $em->flush();
+                return $this->redirectToRoute('list_creneau');
+            }
         }
         return $this->render('creneau_horaire/add.html.twig', [
             'formAdd' => $form->createView(),
+            'showHeureError' => $showHeureError,
+            'showJourError' => $showJourError
         ]);
     }
 
@@ -68,17 +89,32 @@ class CreneauHoraireController extends AbstractController
     #[Route('/creneau-horaire/edit/{id}', name: 'edit_creneau')]
     public function edit(CreneauHoraire $creneau, ManagerRegistry $doctrine, Request $request): Response
     {
+        $showHeureError = false;
         $entityManager = $doctrine->getManager();
 
-        $form = $this->createForm(EditCreneauHoraireType::class, $creneau);
+        $form = $this->createForm(AddCreneauHoraireType::class, $creneau);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            return $this->redirectToRoute('list_creneau');
+        if ($form->isSubmitted()) {
+            if (count($form->getErrors()) > 0) {
+                $showHeureError = true;
+            }
+            $show = true;
+            $cr = $form->getData();
+            $etat = $form->get('etat')->getData();
+
+            if ($form->isValid() || $etat) {
+                if ($cr->isEtat() == true) {
+                    $creneau->setHeureDebut(0);
+                    $creneau->setHeureFin(0);
+                }
+                $entityManager->flush();
+                return $this->redirectToRoute('list_creneau');
+            }
         }
         return $this->renderForm('creneau_horaire/edit.html.twig', [
             'formEdit' => $form,
-            'creneau' => $creneau
+            'creneau' => $creneau,
+            'show' => $showHeureError
         ]);
     }
 }

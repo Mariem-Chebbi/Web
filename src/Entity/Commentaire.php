@@ -17,9 +17,6 @@ class Commentaire
     private ?string $commentaire = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?Client $id_client = null;
-
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
     private ?Centre $id_centre = null;
 
     public function getId(): ?int
@@ -35,18 +32,6 @@ class Commentaire
     public function setCommentaire(string $commentaire): self
     {
         $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?client
-    {
-        return $this->id_client;
-    }
-
-    public function setIdClient(?client $id_client): self
-    {
-        $this->id_client = $id_client;
 
         return $this;
     }
