@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\RendezVousRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 class RendezVous
@@ -15,16 +17,21 @@ class RendezVous
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\GreaterThan('today', message: 'Veuillez choisir une date valide')]
     private ?\DateTimeInterface $date_rdv = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
     private ?ListeAttente $id_liste_attente = null;
 
-    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
+    #[ORM\ManyToOne(inversedBy: 'rendezVouses', cascade: ["persist"])]
+    #[Assert\NotNull(message: "Veuillez choisir un personnel")]
     private ?User $id_personnel = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $heure = null;
+    #[ORM\Column(nullable: true)]
+    // #[Assert\NotBlank(message: "Le personnel n'est pas disponible, veuillez choisir une autre date")]
+    // #[Assert\NotNull(message: "Veuillez choisir une heure")]
+    private ?int $heure = null;
 
     public function getId(): ?int
     {
@@ -67,12 +74,12 @@ class RendezVous
         return $this;
     }
 
-    public function getHeure(): ?\DateTimeInterface
+    public function getHeure(): ?int
     {
         return $this->heure;
     }
 
-    public function setHeure(?\DateTimeInterface $heure): self
+    public function setHeure(?int $heure): self
     {
         $this->heure = $heure;
 
