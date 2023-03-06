@@ -48,6 +48,14 @@ class RendezVousRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function orderedRdv()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.date_rdv', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return RendezVous[] Returns an array of RendezVous objects
     //     */

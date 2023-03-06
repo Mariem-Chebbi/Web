@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+<style>
+    #calendrier {
+        width: 80%;
+        margin: auto;
+        color: black;
+    }
+
+    div.fc-daygrid-event-dot {
+        border-color: rgb(0 0 0 / 0%);
+    }
+
+    #calendrier a {
+        color: black;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top: 150px;">
+    <div id="calendrier">
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    window.onload = () => {
+        let calendarElt = document.querySelector("#calendrier")
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            headerToolbar: {
+                start: 'prev next today',
+                center: 'title',
+                end: 'dayGridMonth timeGridWeek'
+            },
+
+            events: {{ data | raw }},
+
+    eventClick: function (event) {
+        let url = `/rdv/delete/event/${event.event.id}`
+        let donnees = {
+            "id": event.event.id
+        }
+        var deleteMsg = confirm("Voulez-vous vraiment supprimer le rendez-vous de " + event.event.title + " ?");
+        if (deleteMsg) {
+            let xhr = new XMLHttpRequest
+            xhr.open("DELETE", url)
+            xhr.send(JSON.stringify(donnees))
+            console.log(donnees);
+            location.href = '/allRdv';
+        }
+    }});
+
+
+    calendar.render()
+    }
+
+</script>
+
+{% endblock %}

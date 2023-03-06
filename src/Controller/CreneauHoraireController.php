@@ -8,9 +8,11 @@ use App\Form\EditCreneauHoraireType;
 use App\Repository\CreneauHoraireRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 
 class CreneauHoraireController extends AbstractController
 {
@@ -116,5 +118,65 @@ class CreneauHoraireController extends AbstractController
             'creneau' => $creneau,
             'show' => $showHeureError
         ]);
+    }
+
+
+    #[Route('/creneau-horaire/get/', name: 'list_json_creneau', methods: ["GET"])]
+    public function listJson(CreneauHoraireRepository $repo): Response
+    {
+        $creneaux = $repo->findAll();
+
+        $order = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+
+        usort($creneaux, function ($a, $b) use ($order) {
+            $posA = array_search($a->getJour(), $order);
+            $posB = array_search($b->getJour(), $order);
+            return $posA - $posB;
+        });
+        //dd($creneaux);
+
+        return $this->json($creneaux);
+    }
+
+    /**
+     * @Route("/creneau-horaire/post", name="add_json_creneau", methods={"POST"})
+     */
+    public function addJson(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $data = json_decode($request->getContent(), true);
+
+        $creneau = new CreneauHoraire();
+        $creneau->setJour($data['jour']);
+        $creneau->setHeureDebut($data['heureDebut']);
+        $creneau->setHeureFin($data['heureFin']);
+        $creneau->setEtat($data['etat']);
+
+        $entityManager->persist($creneau);
+        $entityManager->flush();
+
+
+        return $this->json("le creneau a été ajouter avec succès");
+    }
+
+    /**
+     * @Route("/creneau-horaire/put/{id}", name="edit_json_creneau", methods={"PUT"})
+     */
+    public function editJson(CreneauHoraire $creneau, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+
+        $data = json_decode($request->getContent(), true);
+
+        $creneau->setHeureDebut($data['heureDebut']);
+        $creneau->setHeureFin($data['heureFin']);
+        $creneau->setEtat($data['etat']);
+
+        $entityManager->flush();
+
+
+        return $this->json("le creneau a été editer avec succès");
     }
 }
