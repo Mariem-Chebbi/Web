@@ -281,6 +281,7 @@ class BlogController extends AbstractController
      #[Route('/image/{image}', name: 'image')]
      public function getPicture(Request $request): BinaryFileResponse
     {
+        //test git
         return new BinaryFileResponse(
             $this->getParameter('images_directory') . "/" . $request->get("image")
         );
