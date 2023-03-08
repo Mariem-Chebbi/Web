@@ -1,0 +1,98 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block body %}
+
+<style>
+    section#contact-section {
+        background-color: #f5f5f5;
+    }
+    .card {
+        width: 100%;
+        max-width: 500px;
+    }
+    .card-body {
+        padding: 2rem;
+    }
+    .text-center a {
+        margin-top: 10px;
+    }
+    .form-group button {
+        margin-top: 10px;
+    }
+    input#inputEmail {
+        margin-left: 10px; /* ajustez la marge selon vos besoins */
+    }
+    h1.text-primary {
+        color: #DB7093; /* Changer la couleur du texte */
+        font-size: 28px; /* Changer la taille de la police */
+        font-weight: bold; /* Mettre le texte en gras */
+        text-align: center; /* Centrer le titre */
+        letter-spacing: 2px; /* Ajouter de l'espace entre les lettres */
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .form-control:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    .form-control::placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #e9ecef;
+        opacity: 1;
+    }
+</style>
+
+<section class="contact-us">
+
+    <section class="login-section">
+
+        <div class="container d-flex flex-column justify-content-center align-items-center mt-500" style="height: 80vh;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        {% if app.user %}
+                            <div class="alert alert-info text-center" role="alert">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        {% endif %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4 mt-0 text-primary">Forgot Password</h1>
+                                <form method="post" class="form">
+                                    <div class="form-group">
+                                        <input type="email" value="" name="email" id="inputEmail" class="form-control" placeholder="Enter your email" required autofocus>
+                                    </div>
+        <div>
+            <small>
+                Enter your email address and we will send you a
+                link to reset your password.
+            </small>
+        </div>
+
+        <button class="btn btn-primary">Send password reset email</button>
+    {{ form_end(requestForm) }}
+{% endblock %}
+

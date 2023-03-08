@@ -1,0 +1,6 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_forgot_password_request:
+    path: '/forgot-password'
+    controller: App\Controller\SecurityController::forgotPasswordRequest

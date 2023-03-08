@@ -1,0 +1,156 @@
+{% extends 'base_back.html.twig' %}
+
+{% block body %}
+
+<style>
+
+
+h1.text-primary {
+  color:  #1ab394;
+;
+  font-size: 28px;
+  text-align: center; /* Centrer le titre */
+  text-transform: uppercase; /* Mettre le texte en majuscules */
+  letter-spacing: 2px; /* Ajouter de l'espace entre les lettres */
+  font-weight: bold; /* Mettre en gras */
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.3); /* Ajouter une ombre au texte */
+}
+.roles-inline label {
+    display: inline-block;
+    margin-right: 10px; /* adjust the spacing between the choices */
+}
+.roles-inline select {
+    display: inline-block;
+}
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+        border: 2px dashed #ccc;
+        border-collapse: collapse;
+    }
+    table td, table th {
+        border: 1px dashed #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    /* Mise en forme pour le formulaire */
+    .form-group {
+        margin-bottom: 20px;
+    }
+   
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+        width: 100%;
+        padding: 21px;
+        border-radius: 1px;
+          background-color: #f2f2f2;
+ background-color: transparent;
+   background-color: #f9f9f9;
+        border: 0.4px solid #ccc;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    select {
+      
+        padding: 5px;
+      
+      
+        font-size: 12px;
+      
+    }
+    .text-danger {
+        color: red;
+        font-size: 2px;
+        font-weight: bold;
+    }
+</style>
+
+
+ 
+   
+
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h1 class="text-center mb-4 mt-0 text-primary">Modifier les informations</h1>
+                        
+            {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-group">
+                            {{ form_label(formClass.email, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                            {{ form_widget(formClass.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formClass.email, {'attr': {'class': 'text-danger'}}) }}
+                        </div>
+
+                         <div class="form-group roles-inline">
+        {{ form_label(formClass.roles, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+        {{ form_widget(formClass.roles) }}
+        {{ form_errors(formClass.roles) }}
+    </div>
+
+                     <div class="form-group">
+    {{ form_label(formClass.nom, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+    {{ form_widget(formClass.nom, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(formClass.nom, {'attr': {'class': 'text-danger'}}) }}
+</div>
+                        <div class="form-group">
+                            {{ form_label(formClass.prenom, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                            {{ form_widget(formClass.prenom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formClass.prenom, {'attr': {'class': 'text-danger'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(formClass.num_tel, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                            {{ form_widget(formClass.num_tel, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formClass.num_tel, {'attr': {'class': 'text-danger'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(formClass.ville, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                            {{ form_widget(formClass.ville, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formClass.ville, {'attr': {'class': 'text-danger'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(formClass.date_naissance, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                            {{ form_widget(formClass.date_naissance) }}
+                            {{ form_errors(formClass.date_naissance) }}
+                        </div>
+
+                        <div class="form-group">
+
+                                       {{ form_label(formClass.image, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                                        {{ form_widget(formClass.image) }}
+                                         {{ form_errors(formClass.image,{'attr':{'class':'text-danger'}}) }}
+                                        </div>
+                                        <div class="form-group">
+
+                                       {{ form_label(formClass.password, null, {'label_attr': {'style': 'color: #1ab394'}}) }}
+                                        {{ form_widget(formClass.password,{'attr': {'class': 'form-control'}}) }}
+                                         {{ form_errors(formClass.password,{'attr':{'class':'text-danger'}}) }}
+                                        </div>
+                                    {{ form_end(formClass) }}
+                               
+                            </div>
+                            
+                             </div>
+                                
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}

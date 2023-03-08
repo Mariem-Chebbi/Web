@@ -1,0 +1,11 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+forgot_password:
+    path: /forgot-password
+    controller: App\Controller\ForgotPasswordController::forgotPassword
+
+reset_password:
+    path: /reset-password/{token}
+    controller: App\Controller\ResetPasswordController::resetPassword

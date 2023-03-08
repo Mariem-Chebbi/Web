@@ -1,0 +1,119 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Les produits </h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">ajouter un produit</h3>
+                                <br>
+
+                                {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+                                        {{ form_label(formClass.email) }}
+                                        <br>
+                                        {{ form_widget(formClass.email) }}
+                                         {{ form_errors(formClass.email,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.roles) }}
+                                        <br>
+                                        {{ form_widget(formClass.roles) }}
+                                         {{ form_errors(formClass.roles,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                        
+                                        
+
+                                        {{ form_label(formClass.nom) }}
+                                        <br>
+                                        {{ form_widget(formClass.nom) }}
+                                         {{ form_errors(formClass.nom,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.prenom) }}
+                                        <br>
+                                        {{ form_widget(formClass.prenom) }}
+                                         {{ form_errors(formClass.prenom,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.num_tel) }}
+                                        <br>
+                                        {{ form_widget(formClass.num_tel) }}
+                                         {{ form_errors(formClass.num_tel,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.ville) }}
+                                        <br>
+                                        {{ form_widget(formClass.ville) }}
+                                         {{ form_errors(formClass.ville,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.date_naissance) }}
+                                        <br>
+                                        {{ form_widget(formClass.date_naissance) }}
+                                         {{ form_errors(formClass.date_naissance,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.image) }}
+                                        <br>
+                                        {{ form_widget(formClass.image) }}
+                                         {{ form_errors(formClass.image,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                    {{ form_end(formClass) }}
+                            </div>
+                             </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}
