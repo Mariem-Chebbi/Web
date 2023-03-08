@@ -1,0 +1,31 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+ <section class="services" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">       
+            <h4>Nos <em>Formations</em></h4>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+          {% for i in Formation %}
+            <div class="item">
+              <div class="service-item">
+                <div class="icon">
+                  <img src= "{{ asset('images/' ~ i.image) }}" style="width: 100%; height: auto;" />
+                </div>
+                <h4>{{i.libelle}}</h4>
+                <p>{{i.description}}</p>
+                <p>{{i.dateFormation|date('Y-m-d')}}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+{% endblock %}

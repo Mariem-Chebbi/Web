@@ -1,0 +1,72 @@
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.bg-success-light {
+  background-color: #d1e7dd;
+}
+.bg-warning-light {
+  background-color: #fff3cd;
+}
+.bg-danger-light {
+  background-color: #f8d7da;
+}
+
+
+    
+</style>
+<div class="col-sm-6" style="text-align: center;"><h3>List des reservation</h3></div>
+<table>
+<thead>
+    <tr>
+    <th>  Id reservation  </th>
+    <th>  Client  </th>
+    <th>  Produit  </th>
+    <th>  Quantite  </th>
+    <th>  DateReservation </th>
+    <th>  Etat  </th>
+   
+    </tr></thead>
+    
+    <tbody>
+    {% for i in Reservation %}
+        <tr><td>{{i.id}}</td>
+        <td>{{i.user.nom}}</td>
+        <td>
+        {% for element in i.idProduit %}
+            {{ element.libelle }}<br>
+        {% endfor %}
+        </td>
+        <td>{{i.quantite}}</td>
+        <td>{{i.dateReservation|date('Y-m-d')}}</td>
+        {% if i.etat=='traiter' %}
+            <td><span class="badge badge-pill bg-success-light" style="color: #3c763d;">{{i.etat}}</span>
+            {% endif %}
+            {% if i.etat=='en cours' %}
+            
+            <td><span class="badge badge-pill bg-warning-light" style="color: #664d03;">{{i.etat}}</span>
+            {% endif %}
+            {% if i.etat=='refuser' %}
+            
+            <td><span class="badge badge-pill bg-danger-light" style="color: #ed5565;">{{i.etat}}</span>
+                {% endif %}
+            </td></tr>
+        {% endfor %}
+</tbody>
+</table>

@@ -1,0 +1,9 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+my_json_data:
+    path: /json-data
+    controller: App\Controller\MyController::getJsonData
+search_products:
+    path: /search-products
+    controller: App\Controller\ProductController::searchProducts

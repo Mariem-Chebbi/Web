@@ -1,0 +1,290 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+  width: 100%
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+{# <style>
+/* personnaliser l'apparence de la fenêtre contextuelle de confirmation */
+.confirmation-popup {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.confirmation-popup h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.confirmation-popup p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.confirmation-popup .buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.confirmation-popup .buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirmation-popup .buttons .confirm-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.confirmation-popup .buttons .cancel-button {
+  background-color: #f44336;
+  color: #fff;
+}
+
+</style> #}
+
+
+
+
+
+<li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="index.html">Dashboard general</a></li>
+                            <li><a href="dashboard_clients.html">Dashboard client</a></li>
+                            <li><a href="dashboard_personnels.html">Dashboard personnels</a></li>
+                            <li><a href="dashboard_produits.html">Dashboard produits</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Avis et commentaire</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="avis.html">Avis</a></li>
+                            <li><a href="commentaire.html">Commentaires</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Blogs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addBlog')}}">Blogs </a></li>
+                            <li><a href="{{path('app_addCategorie')}}">Categorie</a></li>
+                            </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Formations/Certifs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addFormation')}}">Formations </a></li>
+                            <li class="active"><a href="{{path('app_addCertification')}}">Certifications</a></li>
+                            </ul>
+                    </li>
+
+                   <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produits/Reservations</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addProduct')}}">Produits </a></li>
+                            <li><a href="{{path('app_addReservation')}}">Reservations</a></li>
+                            </ul>
+                    </li>
+                   
+                    <li>
+                        <a href="inscriptionCentre.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Inscriptions centres </span><span class="label label-warning pull-right"></span></a>  
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Rechercher..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenue dans Edusex Admin Dashboard</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">     
+                    </ul>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Déconnecter
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+        {% for message in app.flashes('success') %}
+                         <div class="alert alert-success">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                <div class="row  border-bottom white-bg dashboard-header">
+                
+
+
+
+
+
+
+
+
+
+<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Les Certifications </h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">ajouter une Certification</h3>
+                                <br>
+
+                                {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+                                        {{ form_label(formClass.image) }}
+                                        <br>
+                                        {{ form_widget(formClass.image) }}
+                                         {{ form_errors(formClass.image,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.dateCertif) }}
+                                        <br>
+                                        {{ form_widget(formClass.dateCertif) }}
+                                         {{ form_errors(formClass.dateCertif,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                        
+                                        {{ form_label(formClass.idFormation) }}
+                                        <br>
+                                        {{ form_widget(formClass.idFormation) }}
+                                         {{ form_errors(formClass.idFormation,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                    {{ form_end(formClass) }}
+                                    
+                            </div>
+                            <div class="col-sm-6"><h3>Liste des Certifications</h3>
+                                
+                                
+                                <table>
+                                    <tr>
+                                    <th>  Id  </th>
+                                    <th>  image  </th>
+                                    <th>  dateCertif </th>
+                                    <th>  Formation  </th>
+                                    <th>  action  </th>
+                                    </tr>
+                                    <tr>
+                                    {% for i in Certification %}
+                                        <td>{{i.id}}</td>
+                                        <td><img src= "{{ asset('images/' ~ i.image) }}" style="width: 50px; height: auto;" /></td>
+                                        <td>{{i.dateCertif|date('Y-m-d')}}</td>
+                                        <td>
+                                        
+                                            {{ i.idFormation.libelle }}<br>
+                                        
+                                        </td>
+                                        <td>
+                                        {# <button type="button" class="btn btn-w-m btn-primary">Primary</button> #}
+                                            <a href="{{path('supprimerC',{'id':i.id}) }}" class="btn btn-w-m btn-danger"onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?', 'confirmation-popup')">Supprimer</a><br>
+                                            <a href="{{path('updatC',{'id':i.id}) }}" class="btn btn-w-m btn-warning">modifier</a></td>
+                                        
+                                        
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                                {{ knp_pagination_render(Certification) }}
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}

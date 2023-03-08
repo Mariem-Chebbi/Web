@@ -1,0 +1,320 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+  width: 100%;
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.bg-success-light {
+  background-color: #d1e7dd;
+}
+.bg-warning-light {
+  background-color: #fff3cd;
+}
+.bg-danger-light {
+  background-color: #f8d7da;
+}
+
+
+    
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="index.html">Dashboard general</a></li>
+                            <li><a href="dashboard_clients.html">Dashboard client</a></li>
+                            <li><a href="dashboard_personnels.html">Dashboard personnels</a></li>
+                            <li><a href="dashboard_produits.html">Dashboard produits</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="documentations.html.twig"><i class="fa fa-diamond"></i> <span class="nav-label">Documentations</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Avis et commentaire</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="avis.html">Avis</a></li>
+                            <li><a href="commentaire.html">Commentaires</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                        
+                    </li>
+
+                     <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Blogs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addBlog')}}">Blogs </a></li>
+                            <li><a href="{{path('app_addCategorie')}}">Categorie</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Formations/Certifs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addFormation')}}">Formations </a></li>
+                            <li><a href="{{path('app_addCertification')}}">Certifications</a></li>
+                            </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produits/Reservations</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addProduct')}}">Produits </a></li>
+                            <li class="active"><a href="{{path('app_addReservation')}}">Reservations</a></li>
+                            </ul>
+                    </li>
+                   
+                    <li>
+                        <a href="inscriptionCentre.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Inscriptions centres </span><span class="label label-warning pull-right"></span></a>  
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Rechercher..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenue dans Edusex Admin Dashboard</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">     
+                    </ul>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Déconnecter
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+        {% for message in app.flashes('success') %}
+                         <div class="alert alert-success">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('error') %}
+                         <div class="alert alert-danger">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                    
+                <div class="row  border-bottom white-bg dashboard-header"> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Les reservation </h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-5 b-r"><h3 class="m-t-none m-b">affecter une reservation</h3>
+                                <br>
+
+                                {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+                                        
+                                        {{ form_label(formClass.idProduit) }}
+                                        <br>
+                                        {{ form_widget(formClass.idProduit) }}
+                                        {{ form_errors(formClass.idProduit,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.quantite) }}
+                                        <br>
+                                        {{ form_widget(formClass.quantite) }}
+                                        {{ form_errors(formClass.quantite,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.dateReservation) }}
+                                        <br>
+                                        {{ form_widget(formClass.dateReservation) }}
+                                        {{ form_errors(formClass.dateReservation,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                        
+                                        {{ form_label(formClass.etat) }}
+                                        <br>
+                                        {{ form_widget(formClass.etat) }}
+                                        {{ form_errors(formClass.etat,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                    {{ form_end(formClass) }}
+                            </div>
+                            <div class="col-sm-6"><h3>List des reservation</h3>
+                                
+                                
+                                <table>
+                                    <tr>
+                                    <th>  Id reservation  </th>
+                                    <th>  Client  </th>
+                                    <th>  Produit  </th>
+                                    <th>  Quantite  </th>
+                                    <th>  DateReservation </th>
+                                    <th>  Etat  </th>
+                                    <th>  Action  </th>
+                                    </tr>
+                                    <tr>
+                                    {% for i in Reservation %}
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.user.nom}}</td>
+                                        <td>
+                                        {% for element in i.idProduit %}
+                                            {{ element.libelle }}<br>
+                                        {% endfor %}
+                                        </td>
+                                        <td>{{i.quantite}}</td>
+                                        <td>{{i.dateReservation|date('Y-m-d')}}</td>
+                                        {% if i.etat=='traiter' %}
+                                                        <td><span class="badge badge-pill bg-success-light" style="color: #3c763d;">{{i.etat}}</span>
+                                                        {% endif %}
+                                                        {% if i.etat=='en cours' %}
+                                                        
+                                                        <td><span class="badge badge-pill bg-warning-light" style="color: #664d03;">{{i.etat}}</span>
+                                                        {% endif %}
+                                                        {% if i.etat=='refuser' %}
+                                                        
+                                                        <td><span class="badge badge-pill bg-danger-light" style="color: #ed5565;">{{i.etat}}</span>
+                                                            {% endif %}
+                                                        </td>
+                                        {# <td>{{i.etat}}</td>#}
+                                        <td> 
+                                            <a href="{{path('supprimerR',{'id':i.id}) }}" class="btn btn-danger" style="width: 100%;">Supprimer</a><br>
+                                            <a href="{{path('updatR',{'id':i.id}) }}" class="btn btn-warning" style="width: 100%;">Traiter</a></td>
+                                        </tr>
+                                    {% endfor %}
+{{ knp_pagination_render(Reservation) }}
+                                </table><br>
+                                <a href="{{path('app_pdfReservation') }}" class="btn btn-white" style="width: 100%;">Exporter PDF</a>
+                            </div>
+                            
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}

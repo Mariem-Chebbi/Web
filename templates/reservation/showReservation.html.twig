@@ -1,0 +1,107 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+<style>
+.bg-success-light {
+  background-color: #d1e7dd;
+  width: 100%;
+}
+.bg-warning-light {
+  background-color: #fff3cd;
+}
+.bg-danger-light {
+  background-color: #f8d7da;
+  width: 100%;
+}
+
+
+    
+</style>
+
+<section class="our-courses" id="courses">
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            
+           <h4>Mes <em>Reservations</em></h4>
+            
+            {# <p>You just think about TemplateMo whenever you need free CSS templates for your business website</p> #}
+          </div>
+        </div>
+
+        <div>
+     
+
+    
+         {# {% include "formation/showFormation.html.twig" with {"Formation": Formation} %}   #}
+    </div>
+  
+                                        
+
+        </div><br></br>
+
+        <div class="col-lg-12">
+          <div class="naccs">
+            <div class="tabs">
+              <div class="row">
+               
+                <div class="col-lg-10">
+                  <ul class="nacc">
+                  
+                  {# {% set sortedElements = elements| orderBy ('createdAt') %} #}
+                  {% for i in Reservation %}
+                  {% for element in i.idProduit %}
+                    <li class="active">
+                   
+                      <div>
+                      
+                        <div class="left-image">
+                          <img src= "{{ asset('images/' ~ element.image) }}" style="width: 250px; height: 250px;">
+                          <div class="price"></div>
+                        </div>
+                        <div class="right-content">
+                          <h4>{{element.libelle}}</h4>
+                          <p>{{element.description|slice(0, 100) ~ '...'}}</p>
+                          <span>Date Reservation : {{i.dateReservation|date('Y-m-d')}}</span>
+                          <span>Quentité : {{i.quantite}}</span>
+                          <span class="last-span">Etat : {{i.etat}}
+                          
+                          
+                          {# <span>{{i.dateFormation|date('Y-m-d')}}</span> #}
+                          
+                          </span><br>
+                          <br>
+                          <div></div>
+                          
+                          {# <a href="{{ path('inscription_formation', { 'id_personnel': 1 , 'id_formation': 24 }) }}">s'inscription</a></div>  #}
+                          {# {% if app.user %}
+                  {% if i.isInscription(app.user) %}
+                      <a href="{{ path('inscription_remove', {'id': i.getInscriptions(app.user).getId()}) }}">✅</a>
+                  {% else %}
+                      <div class="main-button-gradient" style="width: 10px ; height: auto;">
+                      <a href="{{ path('inscription_add', {'id': i.getId()}) }}">s'inscrire</a>
+                  {% endif %}
+              {% endif %} #}
+                        </div>
+                      </div>
+                    </li><br>
+                    {% endfor %}
+                    {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="center">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}
+
+

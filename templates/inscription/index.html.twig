@@ -1,0 +1,216 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+  width: 100%
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+
+
+
+
+
+
+<li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="index.html">Dashboard general</a></li>
+                            <li><a href="dashboard_clients.html">Dashboard client</a></li>
+                            <li><a href="dashboard_personnels.html">Dashboard personnels</a></li>
+                            <li><a href="dashboard_produits.html">Dashboard produits</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Avis et commentaire</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="avis.html">Avis</a></li>
+                            <li><a href="commentaire.html">Commentaires</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Blogs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="Catgorie1.html">Catgorie 1 </a></li>
+                            <li><a href="Catgorie2.html">Catgorie 2</a></li>
+                            <li><a href="Catgorie3.html">Catgorie 3</a></li>
+                            <li><a href="Catgorie4.html">Catgorie 4</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Formations/Certifs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li class="active"><a href="{{path('app_addFormation')}}">Formations </a></li>
+                            <li><a href="{{path('app_addCertification')}}">Certifications</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produits/Reservations</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addProduct')}}">Produits </a></li>
+                            <li><a href="{{path('app_addReservation')}}">Reservations</a></li>
+                            </ul>
+                    </li>
+                   
+                    <li>
+                        <a href="inscriptionCentre.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Inscriptions centres </span><span class="label label-warning pull-right"></span></a>  
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Rechercher..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenue dans Edusex Admin Dashboard</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">     
+                    </ul>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Déconnecter
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+                <div class="row  border-bottom white-bg dashboard-header"> 
+
+
+
+
+
+
+
+
+<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Les Formations </h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            
+                            <div class="col-sm-6"><h3>Liste des inscriptions</h3>
+                             
+                                
+                                <table>
+                                    <tr>
+                                    <th>  Id  </th>
+                                    <th>  presence  </th>
+                                    <th>  user </th>
+                                    <th>  fromation </th>
+                                    
+                                    
+                                    </tr>
+                                    <tr>
+                                    {% for i in inscriptions %}
+                                    
+                                        <td>{{i.id}}</td>
+                                        
+                                        
+                                        {% if i.present %}
+                                        <td><a href="{{ path('inscription_update', {'id': i['id']}) }}" >présent</a></td>
+                                        {% else %}
+                                        <td><a href="{{ path('inscription_update', {'id': i['id']}) }}" >absent</a></td>
+                                        {% endif %} 
+                                        <td>{{i.id_personnel}}</td>
+                                        <td>{{i.id_Formation}}</td>
+                                        
+                                    </tr>    
+                                    {% endfor %}
+
+                                </table> 
+                                
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}
