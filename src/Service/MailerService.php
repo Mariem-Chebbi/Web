@@ -21,7 +21,7 @@ class MailerService
     ): void {
 
         $from = new Address('commercial.edusex@gmail.com');
-        $to = new Address('mariemchebbi112233@gmail.com');
+
         $email = (new Email())
             ->from('commercial.edusex@gmail.com')
             ->to($to)

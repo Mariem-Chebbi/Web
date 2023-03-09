@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 class RendezVous
@@ -14,11 +15,13 @@ class RendezVous
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['rendezvous:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\GreaterThan('today', message: 'Veuillez choisir une date valide')]
+    #[Groups(['rendezvous:read'])]
     private ?\DateTimeInterface $date_rdv = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
@@ -31,6 +34,7 @@ class RendezVous
     #[ORM\Column(nullable: true)]
     // #[Assert\NotBlank(message: "Le personnel n'est pas disponible, veuillez choisir une autre date")]
     // #[Assert\NotNull(message: "Veuillez choisir une heure")]
+    #[Groups(['rendezvous:read'])]
     private ?int $heure = null;
 
     public function getId(): ?int

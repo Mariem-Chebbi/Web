@@ -56,6 +56,36 @@ class RendezVousRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function orderedCurrentRdv($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.date_rdv >= now()')
+            ->andWhere('u.client = ' + $id)
+            ->orderBy('u.date_rdv', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function orderedHistoryRdv($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.date_rdv < now()')
+            ->andWhere('u.client = ' + $id)
+            ->orderBy('u.date_rdv', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchByDate(string $date)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.date_rdv like :date')
+            ->setParameter('date', $date . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return RendezVous[] Returns an array of RendezVous objects
     //     */

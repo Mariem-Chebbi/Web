@@ -15,13 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 use function PHPUnit\Framework\anything;
 
@@ -52,7 +54,7 @@ class RendezVousController extends AbstractController
         $entityManager->remove($rdv);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list_rdv');
+        return $this->redirectToRoute('app_search');
     }
 
     #[Route('/rdv/details/{id}', name: 'details_rdv')]
@@ -142,7 +144,7 @@ class RendezVousController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($rdv);
             $em->flush();
-            return $this->redirectToRoute('list_rdv');
+            return $this->redirectToRoute('app_search');
         }
 
 
@@ -206,9 +208,10 @@ class RendezVousController extends AbstractController
         ManagerRegistry $doctrine,
     ): Response {
         $donnees  = json_decode($request->getContent());
+        $msg = "ok ok";
 
         if (isset($donnees->id) && !empty($donnees->id)) {
-            $mailer->sendEmail();
+            $mailer->sendEmail("mariem.chebbi@esprit.tn", `aaaaaaaaaa`, "aaa");
             $code = 200;
             $entityManager = $doctrine->getManager();
             $entityManager->remove($rdv);
@@ -222,20 +225,132 @@ class RendezVousController extends AbstractController
         $entityManager->remove($rdv);
         $entityManager->flush(); */
 
-        return $this->redirectToRoute('list_rdv');
+        return $this->redirectToRoute('app_search');
     }
+
+
     #[Route('/mail', name: 'mail_send')]
     public function sendEmail(MailerService $mailer)
     {
         $mailer->sendEmail();
-        return $this->redirectToRoute('list_rdv');
+        return $this->redirectToRoute('app_search');
     }
 
     #[Route('/rdv/get', name: 'list_json_rdv', methods: ["GET"])]
-    public function listJson(RendezVousRepository $repo): Response
+    public function listJson(RendezVousRepository $repo, SerializerInterface $serializer): Response
     {
+
+
         $rdvs = $repo->orderedRdv();
 
-        return $this->json($rdvs);
+        foreach ($rdvs as $rdv) {
+            $list[] = [
+                "id" => $rdv->getId(),
+                "date_rdv" => $rdv->getDateRdv(),
+                "heure" => $rdv->getHeure(),
+                "personnel" => $rdv->getIdPersonnel()->getNom()
+            ];
+        }
+
+
+        $data = $serializer->serialize($list, 'json', ['groups' => ['rendezvous:read']]);
+
+        return new JsonResponse($data, 200, [], true);
+    }
+
+
+    #[Route('/rdv/delete/event/json/{id}', name: 'delete_json_event', methods: 'GET')]
+    public function deleteJsonEvent(
+        ?RendezVous $rdv,
+        ManagerRegistry $doctrine,
+    ): Response {
+        $code = 200;
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($rdv);
+        $entityManager->flush();
+        return new Response('OK', $code);
+    }
+
+    #[Route('/personnel/get', name: 'get_personnel', methods: 'GET')]
+    public function getJsonPersonnel(UserRepository $repo, SerializerInterface $serializer)
+    {
+        $personnels = $repo->findAll();
+        $list = [];
+        foreach ($personnels as $pers) {
+            $list[] = ['nom' => $pers->getNom()];
+        }
+        $data = $serializer->serialize($list, 'json');
+        return  new JsonResponse($data, 200, [], true);
+    }
+
+
+    /**
+     * @Route("/rdv/post/{personnel}/{date}/{heure}", name="add_json_rdv", methods={"GET"})
+     */
+    public function addJson(Request $request, ManagerRegistry $doctrine, string $personnel, DateTime $date, int $heure, UserRepository $repo): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $rdv = new RendezVous();
+        $pers = $repo->findOneBy(["nom" => $personnel]);
+
+        $rdv->setIdPersonnel($pers);
+        $rdv->setDateRdv($date);
+        $rdv->setHeure($heure);
+
+
+
+        $entityManager->persist($rdv);
+        $entityManager->flush();
+
+
+        return $this->json("le creneau a été ajouter avec succès");
+    }
+    /* 
+    #[Route('/rdv/current/list/{id}', name: 'list_current_ordered_rdv')]
+    public function listCurrentOrderedRdv(int $id, RendezVousRepository $repo)
+    {
+        $rdvs = $repo->orderedCurrentRdv($id);
+
+        return $this->render('rendez_vous/list.html.twig', [
+            'rdvs' => $rdvs,
+        ]);
+    } */
+
+
+    #[Route('/rdv/history/list/{id}', name: 'list_history_ordered_rdv')]
+    public function listHistoryOrderedRdv(int $id, RendezVousRepository $repo)
+    {
+        $rdvs = $repo->orderedHistoryRdv($id);
+
+        return $this->render('rendez_vous/history.html.twig', [
+            'rdvs' => $rdvs,
+        ]);
+    }
+
+    #[Route('/rdv/search', name: 'app_search')]
+    public function indexSearch(RendezVousRepository $repo)
+    {
+        $rdvs = $repo->findAll();
+        return $this->render('rendez_vous/search.html.twig', [
+            'rdvs' => $rdvs
+        ]);
+    }
+
+    #[Route('/rdv/search/{date}', name: 'app_rdv_search')]
+    public function search(RendezVousRepository $repo, $date): JsonResponse
+    {
+        $rdvs = $repo->searchByDate($date);
+        $results = [];
+
+        foreach ($rdvs as $rdv) {
+            $results[] = [
+                'id' => $rdv->getId(),
+                'dateRdv' => $rdv->getDateRdv()->format('Y-m-d'),
+                'id_personnel_id' => $rdv->getIdPersonnel()->getNom() . " " . $rdv->getIdPersonnel()->getPrenom(),
+                'heure' => $rdv->getHeure(),
+            ];
+        }
+
+        return new JsonResponse($results);
     }
 }
