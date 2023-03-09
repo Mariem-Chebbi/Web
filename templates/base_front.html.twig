@@ -9,17 +9,18 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>EduWell - Education HTML5 Template</title>
+    <title>EduSex</title>
+    <link rel="icon" href="{{asset('assets_front/images/logo.png')}}">
 {% block css %}
     <!-- Bootstrap core CSS -->
-    <link href="vendor_front/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('vendor_front/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets_front/css/fontawesome.css">
-    <link rel="stylesheet" href="assets_front/css/templatemo-eduwell-style.css">
-    <link rel="stylesheet" href="assets_front/css/owl.css">
-    <link rel="stylesheet" href="assets_front/css/lightbox.css">
+    <link rel="stylesheet" href="{{asset('assets_front/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/templatemo-eduwell-style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/lightbox.css')}}">
 <!--
 {% endblock %}
 TemplateMo 573 EduWell
@@ -40,7 +41,7 @@ https://templatemo.com/tm-573-eduwell
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <a href="index.html" class="logo">
-                          <img src="assets_front/images/templatemo-eduwell.png" alt="EduWell Template">
+                          <img src="{{asset('assets_front/images/logo.png')}}" width="40" height="40" alt="EduSex">
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
@@ -57,7 +58,7 @@ https://templatemo.com/tm-573-eduwell
                               </ul>
                           </li>
                           <li class="scroll-to-section"><a href="#testimonials">Testimonials</a></li> 
-                          <li class="scroll-to-section"><a href="#contact-section">Contact Us</a></li> 
+                          <li><a href="{{path('app_register')}}">Join us</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>
@@ -85,7 +86,7 @@ https://templatemo.com/tm-573-eduwell
         </div>
         <div class="col-lg-6">
           <div class="right-image">
-            <img src="assets_front/images/banner-right-image.png" alt="">
+            <img src="{{asset('assets_front/images/banner-right-image.png')}}" alt="">
           </div>
         </div>
       </div>
@@ -107,7 +108,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-01.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-01.png')}}" alt="">
                 </div>
                 <h4>Useful Tricks</h4>
                 <p>EduWell is the professional HTML5 template for your school or university websites.</p>
@@ -116,7 +117,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-02.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-02.png')}}" alt="">
                 </div>
                 <h4>Creative Ideas</h4>
                 <p>You can download and use this EduWell Template for your teaching and learning stuffs.</p>
@@ -125,7 +126,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-03.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-03.png')}}" alt="">
                 </div>
                 <h4>Ready Target</h4>
                 <p>Please tell your friends about the best CSS template website that is TemplateMo.</p>
@@ -134,7 +135,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-04.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-04.png')}}" alt="">
                 </div>
                 <h4>Technology</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -143,7 +144,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-01.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-05.png')}}" alt="">
                 </div>
                 <h4>Useful Tricks</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -152,7 +153,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-02.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-02.png')}}" alt="">
                 </div>
                 <h4>Creative Ideas</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -161,7 +162,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-03.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-03.png')}}" alt="">
                 </div>
                 <h4>Ready Target</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -495,16 +496,16 @@ https://templatemo.com/tm-573-eduwell
 {% block js %}
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-    <script src="vendor_front/jquery/jquery.min.js"></script>
-    <script src="vendor_front/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('vendor_front/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor_front/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <script src="assets_front/js/isotope.min.js"></script>
-    <script src="assets_front/js/owl-carousel.js"></script>
-    <script src="assets_front/js/lightbox.js"></script>
-    <script src="assets_front/js/tabs.js"></script>
-    <script src="assets_front/js/video.js"></script>
-    <script src="assets_front/js/slick-slider.js"></script>
-    <script src="assets_front/js/custom.js"></script>
+    <script src="{{asset('assets_front/js/isotope.min.js')}}"></script>
+    <script src="{{asset('assets_front/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('assets_front/js/lightbox.js')}}"></script>
+    <script src="{{asset('assets_front/js/tabs.js')}}"></script>
+    <script src="{{asset('assets_front/js/video.js')}}"></script>
+    <script src="{{asset('assets_front/js/slick-slider.js')}}"></script>
+    <script src="{{asset('assets_front/js/custom.js')}}"></script>
     <script>
         //according to loftblog tut
         $('.nav li:first').addClass('active');
