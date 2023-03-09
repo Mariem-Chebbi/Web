@@ -40,19 +40,27 @@ class ReservationFormType extends AbstractType
             
         ])*/
         ->add('idProduit',EntityType::class,[
-            'label' => 'produit',
+            'label' => 'Produit',
             'class' => Product::class,
             
             'choice_label' => 'libelle',
             'multiple' => true,
-            'expanded' => true,
+            //'expanded' => true,
+            'attr' => [
+                'class' => 'form-control',
+                //'multiple' => 'multiple',
+            ],
             
             
             ])    
         ->add('quantite',IntegerType::class,[
-                'label' => 'quantite',
+                'label' => 'Quantité',
                 'required' => true,
                 //'data' => 1,
+                'attr' => [
+                    'class' => 'form-control',
+                    
+                ],
                 'constraints' => [
                     new Range([
                         'min' => 1,
@@ -63,20 +71,34 @@ class ReservationFormType extends AbstractType
                 ],
                 ])
             ->add('dateReservation',DateType::class,[
-                'label' => 'dateReservation',
+                'label' => 'Date De Reservation',
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'background-color: #f8f9fa; border-color: #f8f9fa;',
+                    
+                ],
                 ])
             ->add('etat', ChoiceType::class, [
-                'label' => 'etat',
-                'attr' => ['placeholder' => 'etat du produit'],
+                'label' => 'Etat Du Reservation',
+                'attr' => [
+                    'placeholder' => 'etat du produit',
+                    'class' => 'form-control'
+                ],
                 'choices' => [
-                    'en cours' => 'en cours',
                     'traiter' => 'traiter',
+                    'en cours' => 'en cours',
                     'refuser' => 'refuser',
                 ],
                 
                 ])
-            ->add('Enregistrer', SubmitType::class)
+            ->add('Enregistrer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    
+                ],  
+
+            ])
         ;
 
         

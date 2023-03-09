@@ -63,4 +63,14 @@ class FormationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function searchByLibelle($Libelle)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.libelle like :Libelle')
+            ->setParameter('Libelle', $Libelle . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

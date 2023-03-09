@@ -1,0 +1,76 @@
+{# {% extends 'base_front.html.twig' %}
+{% block body %}
+<section class="simple-cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 offset-lg-1">
+          <div class="left-image">
+            <img src= "{{ asset('images/' ~ Product.image) }}" style="width: 10%; height: auto;"\>
+          </div>
+        </div>
+        <div class="col-lg-5 align-self-center">
+          <h6>{{Product.libelle}}</h6>
+          <h4>Up to 50% OFF For 1+ courses</h4>
+          <p>Kogi VHS freegan bicycle rights try-hard green juice probably haven't heard of them cliche la croix af chillwave.</p>
+          <div class="white-button">
+            <a href="contact-us.html">View Courses</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %} #}
+
+  {% extends 'base_front.html.twig' %}
+{% block body %}  
+<style>
+  @import '~bootstrap-icons/font/bootstrap-icons.css';
+  </style>
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <section class="main-banner" id="top">
+    <div class="container">
+    {% for message in app.flashes('warning') %}
+                         <div class="alert alert-warning">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="header-text">
+            <h4>Bienvenue à notre produits</h4>
+            {# <h6>{{Formation.dateFormation|date('Y-m-d')}}</h6> #}
+            <h2>Produit : <em>{{Product.libelle}}</em></h2>
+            <p>{{Product.description}}</p><br>
+            <div class="main-button-gradient">
+              <div><a href="{{path('app_addReservationFront',{'id':Product.id}) }}">Reserver</a></div><br><br>
+              {% if app.user %}
+                  {% if Product.isFavorite(app.user) %}
+                      <a href="{{ path('favorite_remove2', {'id': Product.getFavorite(app.user).getId()}) }}" >Remove from favorites</a>
+                  {% else %}
+                      <a href="{{ path('favorite_add2', {'id': Product.getId()}) }}" >Add to favorites</a>
+                  {% endif %}
+              {% endif %}
+              </div>
+              <div class="stars">
+               <i class="lar la-star" data-value="1"></i>
+               <i class="lar la-star" data-value="2"></i>
+               <i class="lar la-star" data-value="3"></i>
+               <i class="lar la-star" data-value="4"></i>
+               <i class="lar la-star" data-value="5"></i>
+               </div>
+            
+            
+          
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-image">
+          <img src= "{{ asset('images/' ~ Product.image) }}" style="width: 500px; height: auto;" />
+            {# <img src="assets/images/banner-right-image.png" alt=""> #}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

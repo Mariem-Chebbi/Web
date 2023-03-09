@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CertificationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,6 +28,14 @@ class Certification
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[Assert\NotBlank(message:"formation is required")]
     private ?Formation $idFormation = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_certif', targetEntity: UserCertif::class)]
+    private Collection $userCertifs;
+
+    public function __construct()
+    {
+        $this->userCertifs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -64,6 +74,36 @@ class Certification
     public function setIdFormation(?Formation $idFormation): self
     {
         $this->idFormation = $idFormation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCertif>
+     */
+    public function getUserCertifs(): Collection
+    {
+        return $this->userCertifs;
+    }
+
+    public function addUserCertif(UserCertif $userCertif): self
+    {
+        if (!$this->userCertifs->contains($userCertif)) {
+            $this->userCertifs->add($userCertif);
+            $userCertif->setIdCertif($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCertif(UserCertif $userCertif): self
+    {
+        if ($this->userCertifs->removeElement($userCertif)) {
+            // set the owning side to null (unless already changed)
+            if ($userCertif->getIdCertif() === $this) {
+                $userCertif->setIdCertif(null);
+            }
+        }
 
         return $this;
     }

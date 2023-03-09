@@ -3236,9 +3236,13 @@ body.tour-open .animated {
 /* Dropzone */
 .dropzone {
   min-height: 140px;
+  width: 100%;
   border: 1px dashed #1ab394;
   background: white;
   padding: 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .dropzone .dz-message {
   font-size: 16px;

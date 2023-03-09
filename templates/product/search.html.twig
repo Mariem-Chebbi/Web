@@ -1,0 +1,12 @@
+{% for i in Product %}
+    <tr>
+    <td>{{i.id}}</td>
+    <td>{{i.libelle}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.quantite}}</td>
+    <td><img src= "{{ asset('images/' ~ i.image) }}" style="width: 50px; height: auto;" /></td>
+    <td>
+        <a href="{{path('supprimerP',{'id':i.id}) }}" class="btn btn-danger" style="width: 100%;">Supprimer</a><br>
+        <a href="{{path('updatP',{'id':i.id}) }}" class="btn btn-warning" style="width: 100%;">modifier</a></td>
+    </tr>
+{% endfor %}

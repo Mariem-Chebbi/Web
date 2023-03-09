@@ -1,0 +1,64 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+
+
+
+<section class="main-banner" id="top">
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="header-text">
+            <h4>Bienvenue à notre produits</h4>
+            {# <h6>{{Formation.dateFormation|date('Y-m-d')}}</h6> #}
+            <h2>Produit : <em>{{Product.libelle}}</em></h2>
+            <p>{{Product.description}}</p><br>
+            
+                    {% for message in app.flashes('error') %}
+                         <div class="alert alert-danger">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+            <div>
+              {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+                                        
+                                
+                                        {{ form_label(formClass.quantite) }}
+                                        <br>
+                                        {{ form_widget(formClass.quantite) }}
+                                        {{ form_errors(formClass.quantite,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.dateReservation) }}
+                                        <br>
+                                        {{ form_widget(formClass.dateReservation) }}
+                                        {{ form_errors(formClass.dateReservation,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                        
+                                        
+                                    {{ form_end(formClass) }}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-image">
+          <img src= "{{ asset('images/' ~ Product.image) }}" style="width: 500px; height: auto;" />
+            {# <img src="assets/images/banner-right-image.png" alt=""> #}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+                
+
+                {% endblock %}

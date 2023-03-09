@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CreneauHoraireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,21 +16,31 @@ class CreneauHoraire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    #[Assert\NotBlank(message:"heure debut is required")]
+    #[ORM\Column(nullable: true)]
+    #[Assert\LessThan(
+        message: "L'heure début doit être inférieur à l'heure fin",
+        propertyPath: 'heure_fin',
+    )]
     private ?int $heure_debut = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"jour is required")]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotNull(message: "Veuillez choisir un jour")]
     private ?string $jour = null;
 
-    #[ORM\Column]
-    #[Assert\NotBlank(message:"etat is required")]
+    #[ORM\Column(nullable: true)]
     private ?bool $etat = null;
 
-    #[ORM\Column]
-    #[Assert\NotBlank(message:"heure fin is required")]
+    #[ORM\Column(nullable: true)]
     private ?int $heure_fin = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'creneauHoraires')]
+    private Collection $psychologue;
+
+    public function __construct()
+    {
+        $this->psychologue = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -82,4 +94,30 @@ class CreneauHoraire
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getPsychologue(): Collection
+    {
+        return $this->psychologue;
+    }
+
+    public function addPsychologue(User $psychologue): self
+    {
+        if (!$this->psychologue->contains($psychologue)) {
+            $this->psychologue->add($psychologue);
+        }
+
+        return $this;
+    }
+
+    public function removePsychologue(User $psychologue): self
+    {
+        $this->psychologue->removeElement($psychologue);
+
+        return $this;
+    }
+
+  
 }

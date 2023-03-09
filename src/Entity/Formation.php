@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,6 +32,14 @@ class Formation
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"image is required")]
     private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_formation', targetEntity: Inscription::class)]
+    private Collection $inscriptions;
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,5 +92,52 @@ class Formation
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(User $user): ?Inscription
+    {
+        foreach ($this->inscriptions as $inscription) {
+            if ($inscription->getIdPersonnel() === $user) {
+                return $inscription;
+            }
+        }
+
+        return null;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->setIdFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getIdFormation() === $this) {
+                $inscription->setIdFormation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isInscription(User $user): bool
+    {
+        foreach ($this->inscriptions as $inscription) {
+            if ($inscription->getIdPersonnel() === $user) {
+                return true;
+            }
+        }
+    
+        return false;
     }
 }

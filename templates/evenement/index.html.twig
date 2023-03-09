@@ -1,0 +1,205 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+  width: 100%
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<li>
+                        <a href="{{path('app_addUser')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Utilisateures</span></a>
+                    </li>
+                    
+                    
+
+                     <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Blogs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addBlog')}}">Blogs </a></li>
+                            <li><a href="{{path('app_addCategorie')}}">Categorie</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Formations/Certifs</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addFormation')}}">Formations </a></li>
+                            <li><a href="{{path('app_addCertification')}}">Certifications</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produits/Reservations</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addProduct')}}">Produits </a></li>
+                            <li><a href="{{path('app_addReservation')}}">Reservations</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Centres/Services</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('app_addCentre')}}">Centres </a></li>
+                            <li><a href="{{path('app_addServices')}}">Services</a></li>
+                            </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Evenements</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                        <li class="active"><a href="{{path('app_evenement_index')}}">Evenements </a></li>
+                            <li><a href="{{path('app_sponsor_index')}}">Sponsers</a></li>
+                            </ul>
+                    </li>
+                   
+                    
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Rechercher..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenue dans Edusex Admin Dashboard</span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">     
+                    </ul>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Déconnecter
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+        {% for message in app.flashes('success') %}
+                         <div class="alert alert-success">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                <div class="row  border-bottom white-bg dashboard-header"> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               <div class="row  border-bottom white-bg dashboard-header">
+    <h1>Listes Des Evenements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_event</th>
+                <th>Lieu_event</th>
+                <th>Description</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                {# <th>Sponsor</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.id }}</td>
+                <td>{{ evenement.nomEvent }}</td>
+                <td>{{ evenement.LieuEvent }}</td>
+                <td>{{ evenement.Description }}</td>
+                <td>{{ evenement.DateDebut ? evenement.DateDebut|date('Y-m-d ') : '' }}</td>
+                <td>{{ evenement.DateFin ? evenement.DateFin|date('Y-m-d ') : '' }}</td>
+                {# <td>{{ evenement.getSponser.NomSponser }}</td> #}
+                <td>
+                    <a  href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-w-m btn-primary">show</a>
+                    <a  href="{{ path('app_evenement_edit', {'id': evenement.id}) }}"class="btn btn-w-m btn-warning">edit</a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <form id="search-form" action="{{path('search_evenement')}}">
+     <input type="text" placeholder="Search here..." name ="term" id="search-input" style="width: 100%;"></form><br><br>
+    <div class="center">
+{{ knp_pagination_render(evenements) }}</div>
+
+    <a href="{{ path('app_evenement_new') }}" class="btn btn-w-m btn-success">Create new</a>
+{% endblock %}

@@ -1,0 +1,79 @@
+
+<style>
+
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #33FFD7;
+  border-collapse: collapse;
+    }
+    table td, table th {
+  border: 1px dashed #33FFD7;
+  padding: 10px;
+  text-align: center;
+  vertical-align: center;
+}
+.bg-success-light {
+  background-color: #d1e7dd;
+}
+.bg-warning-light {
+  background-color: #fff3cd;
+}
+.bg-danger-light {
+  background-color: #f8d7da;
+}
+
+
+
+    
+</style>
+<section class="services" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+
+               <div class="row  border-bottom white-bg dashboard-header">
+
+                
+    
+   
+<div class="col-sm-6"  style="text-align: center; color:#FF8033"><h3>List des Sponsors</h3> </div>
+
+ 
+ 
+<table>
+<thead>
+    <tr>
+        <th>  Id  </th>
+        <th>  nom_sponsor  </th>
+        <th>  type </th>
+        <th>  Evenement </th>
+   
+   
+    </tr></thead>
+    
+    <tbody>
+        {% for i in Sponser %}
+        <tr>
+            <td style="vertical-align: center;">{{i.Id}}</td>
+            <td style="vertical-align: center;">{{i.NomSponser}}</td>
+            <td style="vertical-align: center;">{{i.type}}</td>
+            <td style="vertical-align: center;">{{i.Evenement.nomEvent}}</td>
+            
+            
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+  </div></div></div></div>
+   </section>

@@ -42,7 +42,7 @@ class ProductRepository extends ServiceEntityRepository
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
-//    public function findByExampleField($value): array
+//    public function findByLibelle($value): array
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
@@ -63,4 +63,39 @@ class ProductRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+/**
+     * Recherche les formations dont le libellé ou la description contient le terme de recherche.
+     *
+     * @param string $term Le terme de recherche.
+     * @return Formation[] Les formations qui correspondent au terme de recherche.
+     */
+    public function searchByLibelleAndDescription(string $term): array
+    {
+        return $this->createQueryBuilder('f')
+            ->where('f.libelle LIKE :term OR f.description LIKE :term')
+            ->setParameter('term', '%' . $term . '%')
+            ->orderBy('f.libelle', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findProductByLibelle($recherche)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.libelle LIKE :val')
+            ->setParameter("val", $recherche . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function orderByLibelle()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.libelle', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    
 }

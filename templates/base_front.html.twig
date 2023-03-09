@@ -9,19 +9,27 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>EduWell - Education HTML5 Template</title>
+    <title>EduSex</title>
+    <link rel="icon" href="{{asset('assets_front/images/logo.png')}}">
 {% block css %}
     <!-- Bootstrap core CSS -->
-    <link href="vendor_front/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('vendor_front/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets_front/css/fontawesome.css">
-    <link rel="stylesheet" href="assets_front/css/templatemo-eduwell-style.css">
-    <link rel="stylesheet" href="assets_front/css/owl.css">
-    <link rel="stylesheet" href="assets_front/css/lightbox.css">
-<!--
+    <link rel="stylesheet" href="{{asset('assets_front/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/templatemo-eduwell-style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('assets_front/css/lightbox.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <style type="text/css">
+            #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+                height:350px;
+            }
+        </style>
+
 {% endblock %}
+<!--
 TemplateMo 573 EduWell
 
 https://templatemo.com/tm-573-eduwell
@@ -40,23 +48,46 @@ https://templatemo.com/tm-573-eduwell
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <a href="index.html" class="logo">
-                          <img src="assets_front/images/templatemo-eduwell.png" alt="EduWell Template">
+                          <img src="{{asset('assets_front/images/logo.png')}}" width="40" height="40" alt="EduWell Template">
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="#services">Services</a></li>
-                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          {# <li class="scroll-to-section"><a href="#services">Services</a></li> #}
+                          <li><a href="{{path('afficheBlog') }}">Blogs</a></li>
                           <li class="has-sub">
-                              <a href="javascript:void(0)">Pages</a>
+                              <a href="javascript:void(0)">Produits</a>
                               <ul class="sub-menu">
-                                  <li><a href="about-us.html">About Us</a></li>
-                                  <li><a href="our-services.html">Our Services</a></li>
-                                  <li><a href="contact-us.html">Contact Us</a></li>
+                                  <li><a href="{{path('afficheP') }}">Nos Produits</a></li>
+                                  <li><a href="{{path('afficheR') }}">Mes Reservations</a></li>
+                                  <li><a href="{{path('favorite_affiche2') }}">Mes favoris</a></li>
                               </ul>
                           </li>
-                          <li class="scroll-to-section"><a href="#testimonials">Testimonials</a></li> 
+                          <li><a href="{{path('afficheCentre') }}">Centres</a></li>
+                          <li class="has-sub">
+                              <a href="javascript:void(0)">Rendez-vous</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{{path('list_rdv') }}">Mes Rendez-vous</a></li>
+                                  <li><a href="{{path('add_rdv') }}">Prendre RDV</a></li>
+                                  <li><a href="{{path('app_AllRdv') }}">Calandrier</a></li>
+                              </ul>
+                          </li>
+                          <li class="has-sub">
+                          <a href="javascript:void(0)">Formations</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{{path('afficheC') }}">Nos Formations</a></li>
+                                  <li><a href="{{path('CertifUser_affiche') }}">Mes Certificates</a></li>
+                              </ul>
+                              </li>
+
+                              <li class="has-sub">
+                          <a href="javascript:void(0)">Evenements</a>
+                              <ul class="sub-menu">
+                                  <li><a href="{{path('frontevent') }}">Nos Evenements</a></li>
+                                  <li><a href="{{path('frontsponsor') }}">Nos Sponsors</a></li>
+                              </ul>
+                              </li>
                           <li class="scroll-to-section"><a href="#contact-section">Contact Us</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
@@ -85,7 +116,7 @@ https://templatemo.com/tm-573-eduwell
         </div>
         <div class="col-lg-6">
           <div class="right-image">
-            <img src="assets_front/images/banner-right-image.png" alt="">
+            <img src="{{asset('assets_front/images/banner-right-image.png')}}" alt="">
           </div>
         </div>
       </div>
@@ -107,7 +138,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-01.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-01.png')}}" alt="">
                 </div>
                 <h4>Useful Tricks</h4>
                 <p>EduWell is the professional HTML5 template for your school or university websites.</p>
@@ -116,7 +147,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-02.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-02.png')}}" alt="">
                 </div>
                 <h4>Creative Ideas</h4>
                 <p>You can download and use this EduWell Template for your teaching and learning stuffs.</p>
@@ -125,7 +156,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-03.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-03.png')}}" alt="">
                 </div>
                 <h4>Ready Target</h4>
                 <p>Please tell your friends about the best CSS template website that is TemplateMo.</p>
@@ -134,7 +165,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-04.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-04.png')}}" alt="">
                 </div>
                 <h4>Technology</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -143,7 +174,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-01.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-01.png')}}" alt="">
                 </div>
                 <h4>Useful Tricks</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -152,7 +183,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-02.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-02.png')}}" alt="">
                 </div>
                 <h4>Creative Ideas</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -161,7 +192,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-03.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-03.png')}}" alt="">
                 </div>
                 <h4>Ready Target</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -170,7 +201,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-04.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-04.png')}}" alt="">
                 </div>
                 <h4>Technology</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -179,7 +210,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-01.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-01.png')}}" alt="">
                 </div>
                 <h4>Useful Tricks</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -188,7 +219,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-02.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-02.png')}}" alt="">
                 </div>
                 <h4>Creative Ideas</h4>
                 <p>Aenean bibendum consectetur ex eu porttitor. Pellentesque id ultrices metus.</p>
@@ -197,7 +228,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-03.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-03.png')}}" alt="">
                 </div>
                 <h4>Ready Target</h4>
                 <p>In non nisi eget magna efficitur ultricies non quis sapien. Pellentesque tellus.</p>
@@ -206,7 +237,7 @@ https://templatemo.com/tm-573-eduwell
             <div class="item">
               <div class="service-item">
                 <div class="icon">
-                  <img src="assets_front/images/service-icon-04.png" alt="">
+                  <img src="{{asset('assets_front/images/service-icon-04.png')}}" alt="">
                 </div>
                 <h4>Technology</h4>
                 <p>Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.</p>
@@ -245,7 +276,7 @@ https://templatemo.com/tm-573-eduwell
                     <li class="active">
                       <div>
                         <div class="left-image">
-                          <img src="assets_front/images/courses-01.jpg" alt="">
+                          <img src="{{asset('assets_front/images/courses-01.jpg')}}" alt="">
                           <div class="price"><h6>$128</h6></div>
                         </div>
                         <div class="right-content">
@@ -264,7 +295,7 @@ https://templatemo.com/tm-573-eduwell
                     <li>
                       <div>
                         <div class="left-image">
-                          <img src="assets_front/images/courses-02.jpg" alt="">
+                          <img src="{{asset('assets_front/images/courses-02.jpg')}}" alt="">
                           <div class="price"><h6>$156</h6></div>
                         </div>
                         <div class="right-content">
@@ -282,7 +313,7 @@ https://templatemo.com/tm-573-eduwell
                     <li>
                       <div>
                         <div class="left-image">
-                          <img src="assets_front/images/courses-03.jpg" alt="">
+                          <img src="{{asset('assets_front/images/courses-03.jpg')}}" alt="">
                           <div class="price"><h6>$184</h6></div>
                         </div>
                         <div class="right-content">
@@ -300,7 +331,7 @@ https://templatemo.com/tm-573-eduwell
                     <li>
                       <div>
                         <div class="left-image">
-                          <img src="assets_front/images/courses-04.jpg" alt="">
+                          <img src="{{asset('assets_front/images/courses-04.jpg')}}" alt="">
                           <div class="price"><h6>$76</h6></div>
                         </div>
                         <div class="right-content">
@@ -330,7 +361,7 @@ https://templatemo.com/tm-573-eduwell
       <div class="row">
         <div class="col-lg-5 offset-lg-1">
           <div class="left-image">
-            <img src="assets_front/images/cta-left-image.png" alt="">
+            <img src="{{asset('assets_front/images/cta-left-image.png')}}" alt="">
           </div>
         </div>
         <div class="col-lg-5 align-self-center">
@@ -360,49 +391,49 @@ https://templatemo.com/tm-573-eduwell
               <p>“just think about TemplateMo if you need free CSS templates for your website”</p>
                 <h4>Catherine Walk</h4>
                 <span>CEO &amp; Founder</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“think about our website first when you need free HTML templates for your website”</p>
                 <h4>David Martin</h4>
                 <span>CTO of Tech Company</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“just think about our website wherever you need free templates for your website”</p>
                 <h4>Sophia Whity</h4>
                 <span>CEO and Co-Founder</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
                 <h4>Helen Shiny</h4>
                 <span>Tech Officer</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
                 <h4>George Soft</h4>
                 <span>Gadget Reviewer</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
                 <h4>Andrew Hall</h4>
                 <span>Marketing Manager</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
                 <h4>Maxi Power</h4>
                 <span>Fashion Designer</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
             <div class="item">
               <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
                 <h4>Olivia Too</h4>
                 <span>Creative Designer</span>
-                <img src="assets_front/images/quote.png" alt="">
+                <img src="{{asset('assets_front/images/quote.png')}}" alt="">
             </div>
           </div>
         </div>
@@ -497,14 +528,15 @@ https://templatemo.com/tm-573-eduwell
   <!-- Bootstrap core JavaScript -->
     <script src="vendor_front/jquery/jquery.min.js"></script>
     <script src="vendor_front/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="assets_front/js/isotope.min.js"></script>
-    <script src="assets_front/js/owl-carousel.js"></script>
-    <script src="assets_front/js/lightbox.js"></script>
-    <script src="assets_front/js/tabs.js"></script>
-    <script src="assets_front/js/video.js"></script>
-    <script src="assets_front/js/slick-slider.js"></script>
-    <script src="assets_front/js/custom.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <script src="{{asset('assets_front/js/isotope.min.js')}}"></script>
+    <script src="{{asset('assets_front/js/map.js')}}"></script>
+    <script src="{{asset('assets_front/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('assets_front/js/lightbox.js')}}"></script>
+    <script src="{{asset('assets_front/js/tabs.js')}}"></script>
+    <script src="{{asset('assets_front/js/video.js')}}"></script>
+    <script src="{{asset('assets_front/js/slick-slider.js')}}"></script>
+    <script src="{{asset('assets_front/js/custom.js')}}"></script>
     <script>
         //according to loftblog tut
         $('.nav li:first').addClass('active');

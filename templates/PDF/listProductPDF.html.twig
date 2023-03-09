@@ -1,0 +1,60 @@
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+  vertical-align: center;
+}
+.bg-success-light {
+  background-color: #d1e7dd;
+}
+.bg-warning-light {
+  background-color: #fff3cd;
+}
+.bg-danger-light {
+  background-color: #f8d7da;
+}
+
+
+
+    
+</style>
+<div class="col-sm-6" style="text-align: center;"><h3>List des Produits</h3></div>
+<table>
+<thead>
+    <tr>
+        <th>  Id  </th>
+        <th>  libelle  </th>
+        <th>  description </th>
+        <th>  quantite </th>
+        <th>  image  </th>
+   
+    </tr></thead>
+    
+    <tbody>
+        {% for i in Product %}
+        <tr>
+            <td style="vertical-align: center;">{{i.id}}</td>
+            <td style="vertical-align: center;">{{i.libelle}}</td>
+            <td style="vertical-align: center;">{{i.description}}</td>
+            <td style="vertical-align: center;">{{i.quantite}}</td>
+            <td style="vertical-align: center;"><img src= "{{ asset('images/' ~ i.image) }}" style="width: 50px; height: auto;" /></td>
+            
+        </tr>
+        {%endfor %}
+    </tbody>
+</table>

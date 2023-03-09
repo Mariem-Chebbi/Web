@@ -63,4 +63,21 @@ class BlogRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+/**
+     * Recherche les formations dont le libellé ou la description contient le terme de recherche.
+     *
+     * @param string $term Le terme de recherche.
+     * @return Formation[] Les formations qui correspondent au terme de recherche.
+     */
+    public function searchByLibelleAndDescription(string $term): array
+    {
+        return $this->createQueryBuilder('f')
+            ->where('f.libelle LIKE :term OR f.description LIKE :term')
+            ->setParameter('term', '%' . $term . '%')
+            ->orderBy('f.libelle', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
+
+

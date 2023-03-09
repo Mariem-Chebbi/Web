@@ -20,6 +20,7 @@ security:
             custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
+                target: app_register  # URL de redirection après la déconnexion
                 # where to redirect after logout
                 # target: app_any_route
 

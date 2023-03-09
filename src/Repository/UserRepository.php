@@ -80,4 +80,46 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findUserByEmail($recherche)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.email LIKE :val')
+            ->setParameter("val", $recherche . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function orderByEmail()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.email', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function orderByNom()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function orderByPrenom()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.prenom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+    public function getPsyByCentre($centre){
+        return $this->createQueryBuilder('u')
+        ->where('u.centre =:id')
+        ->setParameter('id',$centre)
+        ->getQuery()
+        ->getResult();
+    }
 }

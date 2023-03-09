@@ -48,9 +48,17 @@ class Centre
     #[Assert\NotBlank(message:"service is required")]
     private Collection $idServices;
 
+    #[ORM\OneToMany(mappedBy: 'centre', targetEntity: CreneauHoraire::class)]
+    private Collection $creneauHoraires;
+
+    #[ORM\OneToMany(mappedBy: 'centre', targetEntity: User::class)]
+    private Collection $users;
+
     public function __construct()
     {
         $this->idServices = new ArrayCollection();
+        $this->creneauHoraires = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,6 +170,45 @@ class Centre
     public function removeIdService(Services $idService): self
     {
         $this->idServices->removeElement($idService);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CreneauHoraire>
+     */
+    public function getCreneauHoraires(): Collection
+    {
+        return $this->creneauHoraires;
+    }
+
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setCentre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getCentre() === $this) {
+                $user->setCentre(null);
+            }
+        }
 
         return $this;
     }

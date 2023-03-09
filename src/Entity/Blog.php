@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BlogRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,19 +27,33 @@ class Blog
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"date is required")]
+    #[Assert\LessThanOrEqual("today", message:"La date saisie ne peut pas être superieur à la date d'aujourd'hui.")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"auteur is required")]
     private ?string $auteur = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message:"image is required")]
+    #[Assert\Image(maxSize:"10M",
+        maxSizeMessage:"image is too large",
+        mimeTypesMessage:"invalid file type",
+        uploadErrorMessage:"the file could not be uploaded")]
     private ?string $image = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idBlog',cascade: ['persist', 'remove'])]
+   /* #[ORM\ManyToOne(inversedBy: 'idBlog',cascade: ['persist', 'remove'])]
+    private ?Categorie $categorie = null;*/
+
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'blog',cascade: ['persist'])]
     #[Assert\NotBlank(message:"categorie is required")]
-    private ?Categorie $categorie = null;
+    private Collection $Categorie;
+
+    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: CommentBlog::class)]
+    private Collection $commentBlogs;
+
+    
+
 
     public function getId(): ?int
     {
@@ -73,7 +89,7 @@ class Blog
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -97,21 +113,77 @@ class Blog
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+   /**
+     * @return Collection<int, Categorie>
+     */
+    
+    public function __construct()
     {
-        return $this->categorie;
+        $this->Categorie = new ArrayCollection();
+        $this->commentBlogs = new ArrayCollection();
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function getCategorie(): Collection
     {
-        $this->categorie = $categorie;
+        return $this->Categorie;
+    }
+
+    // public function setIdCategorie(int $idCategorie): self
+    // {
+    //     $this->idCategorie = $idCategorie;
+
+    //     return $this;
+    // }
+
+    public function addCategorie(Categorie $Categorie): self
+    {
+        if (!$this->Categorie->contains($Categorie)) {
+            $this->Categorie->add($Categorie);
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $Categorie): self
+    {
+        $this->Categorie->removeElement($Categorie);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentBlog>
+     */
+    public function getCommentBlogs(): Collection
+    {
+        return $this->commentBlogs;
+    }
+
+    public function addCommentBlog(CommentBlog $commentBlog): self
+    {
+        if (!$this->commentBlogs->contains($commentBlog)) {
+            $this->commentBlogs->add($commentBlog);
+            $commentBlog->setBlog($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentBlog(CommentBlog $commentBlog): self
+    {
+        if ($this->commentBlogs->removeElement($commentBlog)) {
+            // set the owning side to null (unless already changed)
+            if ($commentBlog->getBlog() === $this) {
+                $commentBlog->setBlog(null);
+            }
+        }
 
         return $this;
     }

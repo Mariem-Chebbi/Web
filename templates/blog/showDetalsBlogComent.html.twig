@@ -1,0 +1,88 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}  
+  
+  <section class="main-banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="header-text">
+            <h4>Bienvenue à nos Blogs</h4>
+            {# <h6>{{Formation.dateFormation|date('Y-m-d')}}</h6> #}
+            <h2>Blog : <em>{{Blog.libelle}}</em></h2>
+            <p>Description : {{Blog.description}}</p><br>
+            <p>Date : {{Blog.date|date('Y-m-d')}}</p><br>
+            <p>categorie : </p>
+            {% for element in Blog.Categorie %}
+                                           <p> {{ element.Libelle }}</p><br>
+                                        {% endfor %}
+            <p>Auteur : {{Blog.auteur}}</p><br>
+            <div class="main-button-gradient">
+              <div><a href="{{path('afficheBlog') }}">retour</a></div>
+            </div><br>
+            <div class="main-button-gradient">
+              <div><a href="{{path('app_pdfBlog',{'id':Blog.id}) }}">Exporter PDF</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-image">
+          <img src= "{{ asset('images/' ~ Blog.image) }}" style="width: 500px; height: auto;" />
+            {# <img src="assets/images/banner-right-image.png" alt=""> #}
+          </div>
+        </div>
+        
+      </div>
+    </div>
+</section>
+    <section class="our-courses" id="courses">
+<div class="container">
+    
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            
+           
+            
+            {# <p>You just think about TemplateMo whenever you need free CSS templates for your business website</p> #}
+          </div>
+        </div>
+
+        <div>
+     
+
+    
+         {# {% include "formation/showFormation.html.twig" with {"Formation": Formation} %}   #}
+    </div>
+  
+
+
+        </div><br></br>
+
+        <div class="col-lg-12">
+          <div class="naccs">
+            <div class="tabs">
+              <div class="row">
+               
+<div>
+    
+    
+    
+
+
+                <div class="col-lg-10">
+                  <ul class="nacc">
+                  
+            <h4 style="text-align: center;">Avis Et Commentaires</h4><br><br><br>
+            <form id="search-form" action ="{{path('Comment_add',{'id':Blog.id})}}">
+     <input type="text" placeholder="Ecrire un commentaire" name ="comment" id="search-input" style="width: 100%" ></form><br><br>
+            {% for i in Comment %}
+            <li class="active">
+            <div class="right-content">
+                          <h4>{{i.userName}}</h4>
+            <p>{{i.comment}}</p></div></li>
+            
+            {% endfor %}
+</ul></div></div></div>
+  </section>
+
+  {% endblock %}

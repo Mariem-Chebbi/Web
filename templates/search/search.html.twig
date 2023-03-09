@@ -1,0 +1,30 @@
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            var searchInput = $('#search-input');
+            var resultsDiv = $('#search-results');
+
+            searchInput.keyup(function() {
+                var term = searchInput.val();
+
+                if (term.length >= 2) {
+                    $.get('{{ path('search_product') }}', { term: term }, function(data) {
+                        var html = '';
+                        for (var i = 0; i < data.length; i++) {
+                            html += '<div>' + data[i].name + '</div>';
+                        }
+                        resultsDiv.html(html);
+                    });
+                } else {
+                    resultsDiv.empty();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <input type="text" id="search-input">
+    <div id="search-results"></div>
+{% endblock %}

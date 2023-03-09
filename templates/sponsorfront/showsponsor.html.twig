@@ -1,0 +1,66 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Sponsor{% endblock %}
+
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+  width: 100%
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+<section class="services" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+
+               <div class="row  border-bottom white-bg dashboard-header">
+    <h1>Sponsor</h1>
+
+    <table class="table">
+        <tbody>
+            
+            <tr>
+                <th>Nom_sponser</th>
+                <td>{{ sponsers.NomSponser }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ sponsers.Type }}</td>
+            </tr>
+             <tr>
+                <th>Evenement</th>
+                <td>{{ sponsers.Evenement.nomEvent }}</td>
+            </tr>
+
+           
+        </tbody >
+    </table>
+     <div class="main-button-gradient">
+    <a href="{{ path('frontsponsor') }}">back to list</a>
+    <br></br>
+    </div>
+
+     </div></div></div></div>
+   </section>
+
+
+{% endblock %}
