@@ -1,0 +1,139 @@
+{% extends 'base_back.html.twig' %}
+
+{% block body %}
+<style>
+    button {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+    table {
+   border: 1px dashed #ccc;
+  border-collapse: collapse;
+    }
+    table td, table th {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+    
+</style>
+<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Les Centres </h3>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-4 b-r"><h3 class="m-t-none m-b">ajouter un centre</h3>
+                                <br>
+
+                                {{ form_start(formClass,{'attr': {'novalidate': 'novalidate'}}) }}
+                                        {{ form_label(formClass.Nom_social) }}
+                                        <br>
+                                        {{ form_widget(formClass.Nom_social) }}
+                                         {{ form_errors(formClass.Nom_social,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                
+                                        {{ form_label(formClass.Aderesse) }}
+                                        <br>
+                                        {{ form_widget(formClass.Aderesse) }}
+                                         {{ form_errors(formClass.Aderesse,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                         {{ form_label(formClass.Ville) }}
+                                        <br>
+                                        {{ form_widget(formClass.Ville) }}
+                                         {{ form_errors(formClass.Ville,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+                                        
+                                        {{ form_label(formClass.Logo) }}
+                                        <br>
+                                        {{ form_widget(formClass.Logo) }}
+                                         {{ form_errors(formClass.Logo,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.Tel1) }}
+                                        <br>
+                                        {{ form_widget(formClass.Tel1) }}
+                                         {{ form_errors(formClass.Tel1,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.Tel2) }}
+                                        <br>
+                                        {{ form_widget(formClass.Tel2) }}
+                                         {{ form_errors(formClass.Tel2,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                        {{ form_label(formClass.Description) }}
+                                        <br>
+                                        {{ form_widget(formClass.Description) }}
+                                         {{ form_errors(formClass.Description,{'attr':{'class':'text-danger'}}) }}
+                                        <br>
+                                        <br>
+
+                                    {{ form_end(formClass) }}
+                            </div>
+                            <div class="col-sm-8"><h3>List des Centres</h3>
+                                
+                                
+                                <table>
+                                    <tr>
+                                    <th>  Id  </th>
+                                    <th>  Nom_social  </th>
+                                    <th>  Adresse </th>
+                                    <th>  Ville  </th>
+                                    <th>  Logo  </th>
+                                    <th>  Tel1  </th>
+                                    <th>  Tel2  </th>
+                                    <th>  Services   </th>
+                                    <th>  Description  </th>
+                                    
+
+                                    <th>  action  </th>
+                                    </tr>
+                                    <tr>
+                                    {% for i in Centre %}
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.NomSocial}}</td>
+                                        <td>{{i.Aderesse}}</td>
+                                        <td>{{i.Ville}}</td>
+                                        <td><img src= "{{ asset('images/' ~ i.Logo) }}" style="width: 50px; height: auto;" /></td>
+                                        
+                                        <td>{{i.Tel1}}</td>
+                                        <td>{{i.Tel2}}</td>
+                                        <td>
+                                        {% for element in i.idServices %}
+                                            {{ element.libelle }}<br>
+                                        {% endfor %}
+                                        </td>
+                                        
+                                        <td>{{i.Description}}</td>
+ <td>
+                                            <a href="{{path('supprimerCentre',{'id':i.id}) }}" class="btn btn-white"><i class="fa fa-trash" aria-hidden="true"></i>
+</a><br>
+                                            <a href="{{path('updatCentre',{'id':i.id}) }}" class="btn btn-white"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</a></td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% endblock %}

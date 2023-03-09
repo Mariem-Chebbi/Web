@@ -1,0 +1,7 @@
+{
+    "require": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/webpack-encore-bundle": "^1.16",
+        "giggsey/libphonenumber-for-php": "^8.13"
+    }
+}

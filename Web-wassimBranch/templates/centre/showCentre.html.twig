@@ -1,0 +1,50 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+
+
+<section class="services" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+        
+            <h4>Nos <em>Centres</em></h4>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+
+          {% for i in Centre %}
+            <div class="item">
+              <div class="service-item">
+                <div>
+                  <img class="img-fluid" src= "{{ asset('images/' ~ i.Logo) }}" style="width: 200px; height: auto;" />
+                </div>
+                <h4>{{i.NomSocial}}</h4>
+                <p>{{i.Aderesse}}</p>
+                <p>{{i.Ville}}</p>
+                <p>{{i.Tel1}}</p>
+                <p>{{i.Tel2}}</p>
+
+              </div>
+              
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="rounded p-5 ">
+ <div  id="map"></div>
+    
+  </section>
+</div>
+
+
+{% endblock %}
+
+
+
